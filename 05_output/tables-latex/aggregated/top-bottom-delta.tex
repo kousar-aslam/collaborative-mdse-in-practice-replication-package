@@ -1,0 +1,39 @@
+%Add this to preamble:
+  %\makeatletter
+  %\newcommand\notsotiny{\@setfontsize\notsotiny{7}{7.5}}
+  %\makeatother
+
+  \begin{table*}[]
+  \centering
+  \notsotiny
+  \caption{ The ten most impactful, and the ten least impactful items across the three dimensions.}
+\label{tab:top-bottom-delta}
+\begin{tabular}{@{}llll@{}}
+  \toprule
+\multicolumn{1}{c}{\textbf{Dimension}} & \multicolumn{1}{c}{\textbf{Aspect}} & \multicolumn{1}{c}{\textbf{Feature}} & \multicolumn{1}{c}{\textbf{$\Delta$}} \\ 
+
+  \midrule
+  Model management & Editors and modeling environments & Web-based modeling environment & 60.54 \\ 
+Model management & Model manipulation & Metrics of model complexity & 60 \\ 
+Model management & Model manipulation & Model testing & 54.84 \\ 
+Model management & Model manipulation & Model transformations & 53.33 \\ 
+Communication & Asynchronous communication & Conflicts table & 52.96 \\ 
+Collaboration & Conflicts and consistency & Push notifications on conflicts & 52.79 \\ 
+Communication & Integration & Built-in communication tools & 52.53 \\ 
+Collaboration & Conflicts and consistency & Conflict awareness & 50.71 \\ 
+Model management & Model manipulation & Model debugging & 50.32 \\ 
+Model management & Model manipulation & Natural Language Processing & 48.51 \\ 
+\multicolumn{4}{c}{...} \\ 
+Communication & Synchronous communication & Hand gestures & 9.68 \\ 
+Model management & Models and languages & Collaboration at model level & 6.45 \\ 
+Model management & Editors and modeling environments & Visual editors & 6.45 \\ 
+Model management & Models and languages & General-purpose modeling languages & 6.45 \\ 
+Communication & Synchronous communication & Chat & 6.13 \\ 
+Communication & Integration & External communication tools & 5.48 \\ 
+Collaboration & Stakeholder management & User identification & 3.45 \\ 
+Communication & Asynchronous communication & Email & 3.23 \\ 
+Model management & Editors and modeling environments & Mobile-based modeling environment & 3.1 \\ 
+Model management & Editors and modeling environments & Desktop-based modeling environment & -9.68 \\ 
+\bottomrule
+  \end{tabular}%
+  \end{table*}

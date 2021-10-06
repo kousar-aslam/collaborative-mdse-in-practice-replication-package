@@ -1,0 +1,39 @@
+%Add this to preamble:
+  %\makeatletter
+  %\newcommand\notsotiny{\@setfontsize\notsotiny{7}{7.5}}
+  %\makeatother
+
+  \begin{table*}[]
+  \centering
+  \notsotiny
+  \caption{ The ten most used, and the ten least used features across the three dimensions.}
+\label{tab:top-bottom-current}
+\begin{tabular}{@{}llll@{}}
+  \toprule
+\multicolumn{1}{c}{\textbf{Dimension}} & \multicolumn{1}{c}{\textbf{Aspect}} & \multicolumn{1}{c}{\textbf{Feature}} & \multicolumn{1}{c}{\textbf{Current}} \\ 
+
+  \midrule
+  Model management & Models and languages & Collaboration at model level & 93.55 \\ 
+Model management & Editors and modeling environments & Visual editors & 90.32 \\ 
+Collaboration & Stakeholder management & User identification & 89.66 \\ 
+Model management & Editors and modeling environments & Desktop-based modeling environment & 87.1 \\ 
+Communication & Synchronous communication & Chat & 83.87 \\ 
+Communication & Asynchronous communication & Email & 83.87 \\ 
+Model management & Model manipulation & Model browsing/search & 80.65 \\ 
+Collaboration & Collaboration dynamics & Offline collaboration & 80.65 \\ 
+Collaboration & Versioning & History & 77.42 \\ 
+Model management & Model manipulation & Model validation & 77.42 \\ 
+\multicolumn{4}{c}{...} \\ 
+Communication & Asynchronous communication & Multimedia annotations & 16.67 \\ 
+Model management & Models and languages & Projectional editing & 16 \\ 
+Collaboration & Network architecture and robustness & P2P architecture & 14.81 \\ 
+Collaboration & Stakeholder management & Anonymous access & 13.79 \\ 
+Communication & Asynchronous communication & Voting & 13.33 \\ 
+Model management & Editors and modeling environments & Sketch-based editors & 11.11 \\ 
+Model management & Model manipulation & Metrics of model complexity & 10 \\ 
+Communication & Asynchronous communication & Conflicts table & 10 \\ 
+Model management & Editors and modeling environments & Mobile-based modeling environment & 6.9 \\ 
+Model management & Model manipulation & Natural Language Processing & 6.67 \\ 
+\bottomrule
+  \end{tabular}%
+  \end{table*}
