@@ -18,18 +18,17 @@ project_length = data.iloc[:,10]
 project_systemSize = data.iloc[:,11]
 project_modelSize = data.iloc[:,12]
 
+def chartData(data, fileName):
+    counter = Counter([val.strip() for sublist in data.dropna().str.split(',').tolist() for val in sublist])
+    counter2Plus = [x for x in counter.items() if x[1]>1]
+    counter1 = [x for x in counter.items() if x[1]==1]
 
-def chartPlatforms():
-    counter = Counter([val.strip() for sublist in project_platform.dropna().str.split(',').tolist() for val in sublist])
-    platform2Plus = [x for x in counter.items() if x[1]>1]
-    platform1 = [x for x in counter.items() if x[1]==1]
+    print(counter2Plus)
+    print(len(counter1))
 
-    print(platform2Plus)
-    print(len(platform1))
+    counter2Plus += {('Other', len(counter1))}
 
-    platform2Plus += {('Other', len(platform1))}
-
-    labels, values = zip(*platform2Plus)
+    labels, values = zip(*counter2Plus)
 
     print(labels)
     print(values)
@@ -39,16 +38,19 @@ def chartPlatforms():
 
     plt.bar(indexes, values, width)
     plt.xticks(indexes, labels, rotation=30)
+    plt.ylabel('Occurrences', fontsize=14)
+    
+    ax = plt.gca()
+    labels=ax.get_xticklabels()+ax.get_yticklabels()
+    for label in labels:
+        label.set_fontsize(12)
     
     figure = plt.gcf()
     figure.set_size_inches(8, 6)
     
     plt.gcf().tight_layout()
-    plt.savefig('../05_output/descriptive/platforms.pdf')
+    plt.savefig('../05_output/descriptive/{}.pdf'.format(fileName))
     
     plt.show()
-    
 
-    
-
-chartPlatforms()
+chartData(project_platform, 'project_platform')
