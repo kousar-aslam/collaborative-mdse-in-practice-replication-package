@@ -12,7 +12,9 @@ library(ggrepel)
 
 
 ############## Data ##############
+setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 data <- read.csv2("../03_data/latest/data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
+#data <- data[32:39,]
 
 
 ############## Functions ##############
