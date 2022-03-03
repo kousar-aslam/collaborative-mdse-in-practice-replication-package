@@ -1,0 +1,17 @@
+"feature"	"current"	"need"	"diff"
+"Proposals"	42.86	87.5	44.64
+"Wiki"	37.5	71.43	33.93
+"Call-For-Attention"	0	42.86	42.86
+"Conflicts table"	0	37.5	37.5
+"Voting"	0	37.5	37.5
+"Tags"	28.57	50	21.43
+"Sticky notes"	12.5	37.5	25
+"Annotations"	50	62.5	12.5
+"Forum"	0	12.5	12.5
+"Integrated professional-social networking"	0	12.5	12.5
+"Multimedia annotations"	0	12.5	12.5
+"Comments"	87.5	87.5	0
+"Commit messages"	75	75	0
+"Feedback"	87.5	87.5	0
+"Reviews"	87.5	75	-12.5
+"Email"	100	62.5	-37.5
