@@ -1,4 +1,4 @@
 "feature"	"current"	"need"	"diff"
-"Real-time collaboration"	46.67	93.55	46.88
-"Human-Machine collaboration"	28	73.91	45.91
-"Offline collaboration"	80.65	90.32	9.68
+"Real-time collaboration"	47.37	94.87	47.5
+"Human-Machine collaboration"	28.12	63.33	35.21
+"Offline collaboration"	84.62	89.74	5.13

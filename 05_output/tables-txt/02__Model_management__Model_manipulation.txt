@@ -1,14 +1,14 @@
 "feature"	"current"	"need"	"diff"
-"Model transformations"	36.67	90	53.33
-"Model debugging"	40	90.32	50.32
-"Metrics of model complexity"	10	70	60
-"Model testing"	19.35	74.19	54.84
-"Model execution"	48.28	87.1	38.82
-"Natural Language Processing"	6.67	55.17	48.51
-"Integration with build/DevOps"	46.67	80	33.33
-"Round-trip engineering"	32.26	70	37.74
-"Database integration"	37.93	72.41	34.48
-"Code generation"	67.74	93.33	25.59
-"Model browsing/search"	80.65	100	19.35
-"Model validation"	77.42	96.77	19.35
-"Lazy loading of the models/workspace"	60	72.41	12.41
+"Model transformations"	36.84	86.84	50
+"Model debugging"	34.21	84.62	50.4
+"Model testing"	20.51	74.36	53.85
+"Model execution"	43.24	82.05	38.81
+"Metrics of model complexity"	13.16	63.16	50
+"Integration with build/DevOps"	52.63	81.58	28.95
+"Model browsing/search"	76.92	100	23.08
+"Natural Language Processing"	7.89	48.65	40.75
+"Database integration"	37.84	64.86	27.03
+"Round-trip engineering"	31.58	60.53	28.95
+"Code generation"	74.36	89.47	15.11
+"Model validation"	82.05	94.87	12.82
+"Lazy loading of the models/workspace"	62.16	72.97	10.81

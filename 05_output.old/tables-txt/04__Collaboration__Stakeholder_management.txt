@@ -1,0 +1,6 @@
+"feature"	"current"	"need"	"diff"
+"User presence visualization"	32	74.07	42.07
+"RBAC"	72.41	96.77	24.36
+"Anonymous access"	13.79	50	36.21
+"Authentication/authorization from corporate database"	74.19	90.32	16.13
+"User identification"	89.66	93.1	3.45

@@ -1,8 +1,8 @@
 "feature"	"current"	"need"	"diff"
-"Multi-view modeling"	51.61	96.77	45.16
-"Collaboration at metamodel level"	35.48	77.42	41.94
-"Projectional editing"	16	56	40
-"Importing external languages into the modeling environment"	22.58	56.67	34.09
-"Domain-specific modeling languages"	70.97	87.1	16.13
-"Collaboration at model level"	93.55	100	6.45
-"General-purpose modeling languages"	61.29	67.74	6.45
+"Multi-view modeling"	56.41	97.44	41.03
+"Collaboration at metamodel level"	33.33	71.79	38.46
+"Importing external languages into the modeling environment"	21.05	56.76	35.7
+"Projectional editing"	21.21	56.25	35.04
+"Domain-specific modeling languages"	74.36	87.18	12.82
+"Collaboration at model level"	92.31	97.44	5.13
+"General-purpose modeling languages"	61.54	66.67	5.13
