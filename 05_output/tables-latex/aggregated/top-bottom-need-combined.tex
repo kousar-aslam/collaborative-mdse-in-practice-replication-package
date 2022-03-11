@@ -1,0 +1,75 @@
+%Add this to preamble:
+  %\makeatletter
+  %\newcommand\notsotiny{\@setfontsize\notsotiny{7}{7.5}}
+  %\makeatother
+
+  \begin{table*}[]
+  \caption{The ten most and least adopted and needed techniques.}
+  \label{tab:top-bottom-need}
+  \begin{subtable}[c]{0.5\textwidth}
+  \centering
+  \notsotiny
+  \caption{Adoption.}
+  \label{tab:top-bottom-current}
+  \begin{tabular}{@{}lll@{}}
+  \toprule
+  \multicolumn{1}{c}{\textbf{Feature}} & \multicolumn{1}{c}{\textbf{Feature group}} & \multicolumn{1}{c}{\textbf{\%}} \\
+  \midrule
+  Collaboration at model level & Models and languages & 92.68 \\ 
+Visual editors & Editors and modeling environments & 90.24 \\ 
+Desktop-based environment & Editors and modeling environments & 90.24 \\ 
+Email & Asynchronous communication & 87.8 \\ 
+User identification & Stakeholder management & 87.18 \\ 
+Offline collab & Collaboration dynamics & 85.37 \\ 
+Chat & Synchronous communication & 82.93 \\ 
+External communication tools & Integration & 82.5 \\ 
+History & Versioning & 80.49 \\ 
+Screen sharing & Synchronous communication & 80.49 \\ 
+\multicolumn{3}{c}{...} \\ 
+Forum & Asynchronous communication & 15 \\ 
+Hand gestures & Synchronous communication & 12.82 \\ 
+Metrics of model complexity & Model manipulation & 12.5 \\ 
+Multimedia annotations & Asynchronous communication & 12.5 \\ 
+P2P architecture & Network architecture and robustness & 10.81 \\ 
+Voting & Asynchronous communication & 10.26 \\ 
+Sketch-based editors & Editors and modeling environments & 8.33 \\ 
+Conflicts table & Asynchronous communication & 7.69 \\ 
+NLP & Model manipulation & 7.5 \\ 
+Mobile modeling environment & Editors and modeling environments & 5.13 \\ 
+\bottomrule
+  \end{tabular}%
+  \end{subtable}
+  \begin{subtable}[c]{0.5\textwidth}
+  \centering
+  \notsotiny
+  \caption{Need.}
+  \label{tab:top-bottom-need}
+  \begin{tabular}{@{}lll@{}}
+  \toprule
+  \multicolumn{1}{c}{\textbf{Feature}} & \multicolumn{1}{c}{\textbf{Feature group}} & \multicolumn{1}{c}{\textbf{\%}} \\
+  \midrule
+  Model browsing/search & Model manipulation & 100 \\ 
+MVM & Models and languages & 97.56 \\ 
+Collaboration at model level & Models and languages & 97.56 \\ 
+Real-time collab & Collaboration dynamics & 95.12 \\ 
+Model merging & Versioning & 95.12 \\ 
+Model validation & Model manipulation & 95.12 \\ 
+History & Versioning & 95.12 \\ 
+Visual editors & Editors and modeling environments & 95.12 \\ 
+RBAC & Stakeholder management & 92.68 \\ 
+Screen sharing & Synchronous communication & 92.68 \\ 
+\multicolumn{3}{c}{...} \\ 
+Call-For-Attention & Asynchronous communication & 50 \\ 
+Anonymous access & Stakeholder management & 50 \\ 
+Voting & Asynchronous communication & 44.74 \\ 
+Forum & Asynchronous communication & 43.59 \\ 
+Sketch-based editors & Editors and modeling environments & 37.84 \\ 
+Integrated professional-social networking & Asynchronous communication & 37.14 \\ 
+P2P architecture & Network architecture and robustness & 34.29 \\ 
+Multimedia annotations & Asynchronous communication & 31.43 \\ 
+Hand gestures & Synchronous communication & 22.22 \\ 
+Mobile modeling environment & Editors and modeling environments & 10 \\ 
+\bottomrule
+  \end{tabular}
+  \end{subtable}
+  \end{table*}

@@ -246,6 +246,67 @@ latexTopBottomTable <- function(diffData, lastColumnName, fileName, caption, lab
   \\end{table*}", file=fileName, append = TRUE)
 }
 
+
+latexCombinedTopBottomTable <- function(leftData, rightData, fileName, caption, label, dimension = TRUE) {
+  cols.dont.want <- "wdiff"
+  leftData <- leftData[, !names(leftData) %in% cols.dont.want, drop=F]
+  rightData <- rightData[, !names(rightData) %in% cols.dont.want, drop=F]
+  
+  top10Left <- leftData[1:10,]
+  top10Right <- rightData[1:10,]
+  bTailIndexLeft <- nrow(leftData)
+  bTailIndexRight <- nrow(rightData)
+  bHeadIndexLeft <- bTailIndexLeft - 9
+  bHeadIndexRight <- bTailIndexRight - 9
+  bottom10Left <- leftData[bHeadIndexLeft:bTailIndexLeft,]
+  bottom10Right <- rightData[bHeadIndexRight:bTailIndexRight,]
+  
+  cat("%Add this to preamble:
+  %\\makeatletter
+  %\\newcommand\\notsotiny{\\@setfontsize\\notsotiny{7}{7.5}}
+  %\\makeatother\n
+  \\begin{table*}[]
+  \\caption{The ten most and least adopted and needed techniques.}
+  \\label{tab:top-bottom-need}
+  \\begin{subtable}[c]{0.5\\\\textwidth}
+  \\centering
+  \\notsotiny
+  \\caption{Adoption.}
+  \\label{tab:top-bottom-current}
+  \\begin{tabular}{@{}lll@{}}
+  \\toprule
+  \\multicolumn{1}{c}{\\textbf{Feature}} & \\multicolumn{1}{c}{\\textbf{Feature group}} & \\multicolumn{1}{c}{\\textbf{\\%}} \\\\
+  \\midrule
+  ", file=fileName, append = TRUE)
+  write.table(top10Left, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
+  
+  cat("\\multicolumn{3}{c}{...} \\\\ \n", file=fileName, append = TRUE)
+  
+  write.table(bottom10Left, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
+  cat("\\bottomrule
+  \\end{tabular}%
+  \\end{subtable}
+  \\begin{subtable}[c]{0.5\\textwidth}
+  \\centering
+  \\notsotiny
+  \\caption{Need.}
+  \\label{tab:top-bottom-need}
+  \\begin{tabular}{@{}lll@{}}
+  \\toprule
+  \\multicolumn{1}{c}{\\textbf{Feature}} & \\multicolumn{1}{c}{\\textbf{Feature group}} & \\multicolumn{1}{c}{\\textbf{\\%}} \\\\
+  \\midrule
+  ", file=fileName, append = TRUE)
+  write.table(top10Right, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
+  
+  cat("\\multicolumn{3}{c}{...} \\\\ \n", file=fileName, append = TRUE)
+  
+  write.table(bottom10Right, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
+  cat("\\bottomrule
+  \\end{tabular}
+  \\end{subtable}
+  \\end{table*}", file=fileName, append = TRUE)
+}
+
 ############## Main globals ##############
 index = 1
 allDiffs <-data.frame(dimension=character(),
@@ -491,6 +552,9 @@ d = allDiffsToPrint[order(-allDiffsToPrint$need), ]
 latexTopBottomTable(diffData = d[, c(1:3,5)], "Need", fileName="../05_output/tables-latex/aggregated/top-bottom-need.tex", caption="The ten most needed, and the ten least needed features across the three dimensions", label="top-bottom-need", dimension = TRUE)
 d = allDiffsToPrint[order(-allDiffsToPrint$diff), ]
 latexTopBottomTable(diffData = d[, c(1:3,6)], "$\\Delta$", fileName="../05_output/tables-latex/aggregated/top-bottom-delta.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
+dLeft = allDiffsToPrint[order(-allDiffsToPrint$current), ]
+dRight = allDiffsToPrint[order(-allDiffsToPrint$need), ]
+latexCombinedTopBottomTable(leftData = dLeft[, c(3, 2, 6)], rightData = dRight[, c(3, 2, 6)], fileName="../05_output/tables-latex/aggregated/top-bottom-need-combined.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
 
 
 ######## Plot current vs need ########
