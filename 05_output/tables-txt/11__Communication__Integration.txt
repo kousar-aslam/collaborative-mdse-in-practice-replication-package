@@ -1,3 +1,3 @@
 "feature"	"current"	"need"	"diff"
-"Built-in communication tools"	18.42	78.38	59.96
-"External communication tools"	81.58	77.78	-3.8
+"Built-in communication tools"	20	74.36	54.36
+"External communication tools"	82.5	78.95	-3.55

@@ -1,9 +1,9 @@
 "feature"	"current"	"need"	"diff"
-"Conflict awareness"	38.89	89.47	50.58
-"Push notifications on conflicts"	17.65	72.22	54.58
-"Automation of resolution"	34.21	75.68	41.47
-"Prevention"	45.95	81.58	35.63
-"Metrics of degree of conflict/inconsistency"	17.14	62.16	45.02
-"Eventual consistency"	21.21	56.25	35.04
-"Locking"	55.26	76.32	21.05
-"Manual resolution"	68.42	84.21	15.79
+"Conflict awareness"	42.11	87.5	45.39
+"Push notifications on conflicts"	16.67	71.05	54.39
+"Automation of resolution"	35	76.92	41.92
+"Prevention"	43.59	80	36.41
+"Metrics of degree of conflict/inconsistency"	16.22	61.54	45.32
+"Eventual consistency"	20	52.94	32.94
+"Manual resolution"	65	85	20
+"Locking"	55	75	20

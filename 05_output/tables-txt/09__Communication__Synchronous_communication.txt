@@ -1,8 +1,8 @@
 "feature"	"current"	"need"	"diff"
-"Change review sessions"	61.54	84.21	22.67
-"Screen sharing"	79.49	92.31	12.82
-"Face-to-face"	63.16	76.32	13.16
-"Voice"	78.95	89.19	10.24
-"Audio"	67.57	74.29	6.72
-"Chat"	84.62	89.47	4.86
-"Hand gestures"	13.51	20.59	7.07
+"Change review sessions"	58.54	85	26.46
+"Screen sharing"	80.49	92.68	12.2
+"Face-to-face"	65	77.5	12.5
+"Voice"	80	89.74	9.74
+"Chat"	82.93	90	7.07
+"Audio"	69.23	75.68	6.44
+"Hand gestures"	12.82	22.22	9.4
