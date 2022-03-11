@@ -1,8 +1,0 @@
-"feature"	"current"	"need"	"diff"
-"Face-to-face"	75	87.5	12.5
-"Change review sessions"	75	75	0
-"Chat"	87.5	87.5	0
-"Hand gestures"	0	0	0
-"Voice"	87.5	87.5	0
-"Audio"	42.86	37.5	-5.36
-"Screen sharing"	87.5	75	-12.5

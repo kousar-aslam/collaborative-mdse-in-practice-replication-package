@@ -1,9 +1,0 @@
-"feature"	"current"	"need"	"diff"
-"Semantic model differencing"	50	87.5	37.5
-"Internal versioning"	62.5	75	12.5
-"External version control"	75	75	0
-"Model merging"	87.5	87.5	0
-"Version branching"	87.5	87.5	0
-"Model differencing"	75	62.5	-12.5
-"History"	100	87.5	-12.5
-"Undo-redo"	100	87.5	-12.5
