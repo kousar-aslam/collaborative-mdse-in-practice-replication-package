@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from collections import Counter
 import numpy as np
 
-data = pd.read_csv('../03_data/latest/data-processed.csv', sep=';')
+data = pd.read_csv('../03_data/latest/data-preprocessed.csv', sep=';')
 
 person_background = data.iloc[:,1]
 person_experience = data.iloc[:,2]
