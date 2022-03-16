@@ -268,7 +268,8 @@ latexCombinedTopBottomTable <- function(leftData, rightData, fileName, caption, 
   \\begin{table*}[]
   \\caption{The ten most and least adopted and needed techniques.}
   \\label{tab:top-bottom-need}
-  \\begin{subtable}[c]{0.5\\\\textwidth}
+  \\begin{subtable}[c]{0.5\\", file=fileName, append = TRUE)
+  cat("textwidth}
   \\centering
   \\notsotiny
   \\caption{Adoption.}
@@ -286,7 +287,8 @@ latexCombinedTopBottomTable <- function(leftData, rightData, fileName, caption, 
   cat("\\bottomrule
   \\end{tabular}%
   \\end{subtable}
-  \\begin{subtable}[c]{0.5\\textwidth}
+  \\begin{subtable}[c]{0.5\\", file=fileName, append = TRUE)
+  cat("textwidth}
   \\centering
   \\notsotiny
   \\caption{Need.}
@@ -554,7 +556,7 @@ d = allDiffsToPrint[order(-allDiffsToPrint$diff), ]
 latexTopBottomTable(diffData = d[, c(1:3,6)], "$\\Delta$", fileName="../05_output/tables-latex/aggregated/top-bottom-delta.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
 dLeft = allDiffsToPrint[order(-allDiffsToPrint$current), ]
 dRight = allDiffsToPrint[order(-allDiffsToPrint$need), ]
-latexCombinedTopBottomTable(leftData = dLeft[, c(3, 2, 6)], rightData = dRight[, c(3, 2, 6)], fileName="../05_output/tables-latex/aggregated/top-bottom-need-combined.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
+latexCombinedTopBottomTable(leftData = dLeft[, c(3, 2, 4)], rightData = dRight[, c(3, 2, 5)], fileName="../05_output/tables-latex/aggregated/top-bottom-need-combined.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
 
 
 ######## Plot current vs need ########
