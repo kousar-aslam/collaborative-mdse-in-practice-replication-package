@@ -4,7 +4,7 @@ import csv
 def sensitive_data():
     return [(182, 4)]
 
-fileLocation = '../03_data/latest'
+fileLocation = '../03_data'
     
 workbook = openpyxl.load_workbook('{}/data.xlsx'.format(fileLocation))
 sheet = workbook.active
