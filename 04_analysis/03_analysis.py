@@ -2,9 +2,15 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from collections import Counter
 import numpy as np
+import os
 
 fileLocation = '../03_data'
 data = pd.read_csv('{}/data-preprocessed.csv'.format(fileLocation), sep=';')
+
+outputLocation = '../05_output/descriptive'
+if not os.path.exists(outputLocation):
+    os.makedirs(outputLocation)
+
 
 def chartData(data, fileName):
     counter = Counter([val.strip() for sublist in data.dropna().str.split(',').tolist() for val in sublist])
@@ -37,7 +43,8 @@ def chartData(data, fileName):
     figure.set_size_inches(8, 6)
     
     plt.gcf().tight_layout()
-    plt.savefig('../05_output/descriptive/{}.pdf'.format(fileName))
+
+    plt.savefig('{}/{}.pdf'.format(outputLocation, fileName))
     
     plt.show()
 
