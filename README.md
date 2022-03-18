@@ -20,7 +20,10 @@ The full dataset, analysis scripts, raw results, and transcripts of the focus gr
 ### Analysis scripts
 
 * `/04_analysis` - Analysis scripts.
-   * `/likert.r` - .R script producing PDF, Excel, LaTeX and .txt reports into folder `/05_output`.
+   * `/01_prepare.py` - Creates a `/03_data/data.csv` from the questionnaire spreadsheet downloaded as an Excel.
+   * `/02_preprocess.py` - Takes the relevant demographic columns from the full data file, cleans them up by merging similar concepts, cleaning up numeric data, and cleaning up comma-separated values. Exports the clean data into `/03_data/data-preprocessed.csv`.
+   * `/03_analysis.py` - Analysis script producing descriptive demographic charts into folder `/05_output/descriptive`. Input: `/03_data/data-preprocessed.csv`.
+   * `/likert.r` - .R script producing PDF, Excel, LaTeX and .txt reports into folder `/05_output`. Input: `/03_data/data.csv`.
 
 Upon running the script, the following directory structure is produced. (New runs of the script will remove the previously generated folders.)
 * `/05_output`
