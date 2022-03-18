@@ -27,6 +27,8 @@ The full dataset, analysis scripts, raw results, and transcripts of the focus gr
 
 Install Python requirements before running the scripts by running `pip install -r requirements.txt`.
 
+### Results
+
 Upon running the `/likert.r` script, the following directory structure is produced. (New runs of the script will remove the previously generated folders.)
 * `/05_output`
    * `/aggregated` - Aggregated descriptive statistics of the three dimensions.
