@@ -25,7 +25,9 @@ The full dataset, analysis scripts, raw results, and transcripts of the focus gr
    * `/03_analysis.py` - Analysis script producing descriptive demographic charts into folder `/05_output/descriptive`. Input: `/03_data/data-preprocessed.csv`.
    * `/likert.r` - .R script producing PDF, Excel, LaTeX and .txt reports into folder `/05_output`. Input: `/03_data/data.csv`.
 
-Upon running the script, the following directory structure is produced. (New runs of the script will remove the previously generated folders.)
+Install Python requirements before running the scripts by running `pip install -r requirements.txt`.
+
+Upon running the `/likert.r` script, the following directory structure is produced. (New runs of the script will remove the previously generated folders.)
 * `/05_output`
    * `/aggregated` - Aggregated descriptive statistics of the three dimensions.
       * `/xlsx/Aggregated.xlsx` - Adoption and needs aggregated over every feature group, in an Excel table for allowing further inspection and exploration.
@@ -33,3 +35,7 @@ Upon running the script, the following directory structure is produced. (New run
    * `/tables-latex` - Adoption and needs for every category, in LaTeX tables.
       * `/aggregated` - Adoption and needs aggregated over every feature group, ordered by the different metrics, in LaTeX tables.
    * `/tables-txt` - Adoption and needs for every feature group, in .txt files.
+
+Upon running the `/03_analysis.py` script, the following directory structure is produced.
+* `/05_output`
+   * `/descriptive` - Charts of some descriptive statistics of the participants, their companies, the tools used, model sizes, etc.
