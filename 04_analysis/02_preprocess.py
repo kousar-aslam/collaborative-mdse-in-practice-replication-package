@@ -4,7 +4,7 @@ import re
 fileLocation = '../03_data'
 data = pd.read_excel('{}/data.xlsx'.format(fileLocation))
 
-analysisData = data.iloc[:,1:12]
+analysisData = data.iloc[:,1:13]
 
 def preprocess():
     #Column 0: Background (nominal, category). Preprocessing: bring similar roles to a common form.
@@ -121,10 +121,13 @@ def preprocess():
     #Column 9: Project length (nominal, category). Preprocessing: nothing.
     
     #Column 10: Project size. Preprocessing: Nothing - data is too diverse.
+    
+    #Column 11: Model size. Preprocessing: Retain short label (small, medium, large)
+    analysisData.iloc[:, 11] = analysisData.iloc[:, 11].map(lambda x: str(x).split(' ')[0])
 
 preprocess()
 
-analysisData.columns=['background', 'experience', 'role', 'location', 'companySize', 'sector', 'domain', 'collaborators', 'tools', 'projectLength', 'projectSize']
+analysisData.columns=['background', 'experience', 'role', 'location', 'companySize', 'sector', 'domain', 'collaborators', 'tools', 'projectLength', 'projectSize', 'modelSize']
 
 print(analysisData)
 
