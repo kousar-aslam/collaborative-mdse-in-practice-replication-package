@@ -3,20 +3,8 @@ from matplotlib import pyplot as plt
 from collections import Counter
 import numpy as np
 
-data = pd.read_csv('../03_data/data-preprocessed.csv', sep=';')
-
-person_background = data.iloc[:,1]
-person_experience = data.iloc[:,2]
-person_role = data.iloc[:,3]
-company_location = data.iloc[:,4]
-company_size = data.iloc[:,5]
-company_sector = data.iloc[:,6]
-company_appdomain = data.iloc[:,7]
-project_collaboratingPeople = data.iloc[:,8]
-project_platform = data.iloc[:,9]
-project_length = data.iloc[:,10]
-project_systemSize = data.iloc[:,11]
-project_modelSize = data.iloc[:,12]
+fileLocation = '../03_data'
+data = pd.read_csv('{}/data-preprocessed.csv'.format(fileLocation), sep=';')
 
 def chartData(data, fileName):
     counter = Counter([val.strip() for sublist in data.dropna().str.split(',').tolist() for val in sublist])
@@ -53,4 +41,4 @@ def chartData(data, fileName):
     
     plt.show()
 
-chartData(project_platform, 'project_platform')
+chartData(data['background'], 'latest')
