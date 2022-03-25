@@ -11,41 +11,60 @@ outputLocation = '../05_output/descriptive'
 if not os.path.exists(outputLocation):
     os.makedirs(outputLocation)
 
+threshold = 1
 
-def chartData(data, fileName):
-    counter = Counter([val.strip() for sublist in data.dropna().str.split(',').tolist() for val in sublist])
-    counter2Plus = [x for x in counter.items() if x[1]>1]
-    counter1 = [x for x in counter.items() if x[1]==1]
+def chartData(data, categories, fileName):
+    plotData = {}
+    for i in range(len(categories)):
+        category = categories[i]
+        d = data[category]
+        counter = Counter([val.strip() for sublist in d.dropna().str.split(',').tolist() for val in sublist])
+        
+        #split at threshold 
+        counterAboveTreshold = [x for x in counter.items() if x[1]>threshold]
+        #anything not above the threshold goes into the 'Other' category
+        counterUpToTreshold = [x for x in counter.items() if x[1]<=threshold]
+        #sort non-'Other' categories
+        counterAboveTreshold = sorted(counterAboveTreshold, key=lambda x: x[1])
+        #put the 'Other' category to the final counter
+        fullCounter = [('Other', len(counterUpToTreshold))] + counterAboveTreshold
 
-    print(counter2Plus)
-    print(len(counter1))
+        plotData[category] = fullCounter
 
-    counter2Plus += {('Other', len(counter1))}
-
-    labels, values = zip(*counter2Plus)
-
-    print(labels)
-    print(values)
-
-    indexes = np.arange(len(labels))
-    width = 0.5
-
-    plt.bar(indexes, values, width)
-    plt.xticks(indexes, labels, rotation=30)
-    plt.ylabel('Occurrences', fontsize=14)
+    numCharts = len(plotData.keys())
+    rows = [len(p) for p in plotData.values()]
     
-    ax = plt.gca()
-    labels=ax.get_xticklabels()+ax.get_yticklabels()
-    for label in labels:
-        label.set_fontsize(12)
+    fig, axs = plt.subplots(nrows=numCharts, sharex=False, gridspec_kw={'height_ratios': rows})
     
-    figure = plt.gcf()
-    figure.set_size_inches(8, 6)
-    
-    plt.gcf().tight_layout()
+    if len(categories) == 1:
+        axs = [axs]
+        
+    for i, category in enumerate(plotData):
+        counter = plotData[category]
+        labels, values = zip(*counter)
+
+        #print(labels)
+        #print(values)
+
+        indexes = np.arange(len(labels))
+        width = 0.75
+        
+        plt.sca(axs[i])        
+        plt.barh(indexes, values, width)
+        plt.yticks(indexes, labels, rotation=0)
+        #plt.xlabel('Occurrences', fontsize=14)
+        plt.title(category, fontsize=14)
+
+        ax = plt.gca()
+        labels=ax.get_yticklabels()+ax.get_xticklabels()
+        for label in labels:
+            label.set_fontsize(12)
+        
+        figure = plt.gcf()
+        figure.set_size_inches(8, 4)
+        plt.gcf().tight_layout()
 
     plt.savefig('{}/{}.pdf'.format(outputLocation, fileName))
-    
     plt.show()
 
-chartData(data['background'], 'latest')
+chartData(data, ['background', 'role'], 'latest')
