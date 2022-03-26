@@ -7,10 +7,10 @@ Technical (STEM);25;Consultant;Across Europe;10-24;Software;Automotive;10;MetaEd
 Business;18;CTO;Hungary;500+;Automotive;Automotive;15;Enterprise Architect + home-grown AUTOSAR tool;25-36;1M LOC (embededded C), or 200 AUTOSAR SW Components;medium
 Technical (STEM);12;Research;Belgium;100-249;R&D;Manufacturing;5;Eclipse;25-36;Typically multiple software projects per research project. Each is rather small.;medium
 Technical (STEM);27;Research;India;500+;Consulting;Finance;100;Homegrown MDSD platform;25-36;Several million lines of code;large
-Technical (STEM);27;Architect;NL;1-9;industry;embedded software;5;Enterprise Architect;25-36;20 Mloc;medium
-Technical (STEM);3;Requirements engineer;;1-9;IT;Education;5;Eclipse;4-12;;small
+Technical (STEM);27;Architect;Netherlands;1-9;industry;embedded software;5;Enterprise Architect;25-36;20 Mloc;medium
+Technical (STEM);3;Requirements engineer;nan;1-9;IT;Education;5;Eclipse;4-12;;small
 Technical (STEM);8;Senior Software Engineer;USA;500+;MBSE;Software tools;10;Simulink, System Composer;4-12;;large
-Technical (STEM);30;Consultant;;500+;Telecom;mobile phones;300;MetaEdit+;>180;Product family, thousands of person-years;large
+Technical (STEM);30;Consultant;nan;500+;Telecom;mobile phones;300;MetaEdit+;>180;Product family, thousands of person-years;large
 Technical (STEM);23;Principal Business Analyst;Switzerland;500+;Biotech & Specialty Chemistry;Industrial Automation;500;Proprietary;49-60;1000 building blocks (screens & code), 200 process flows;large
 Technical (STEM);7;Senior Software Eng.;Canada;1-9;Software Tools;Software tools;2;Eclipse;61+;~100000 LOC;small
 Technical (STEM);25;Team/Tech Lead;USA;500+;Space exploration;Robotics;10;OpenMBEE, 3DS CATIA Cameo NoMagic, Modelon, Jupyter, IncQuery, MapleMBSE, Syndeia, TomSawyer;25-36;1000 LOC;medium
@@ -19,7 +19,7 @@ Technical (STEM);15;Architect;Germany;1-9;Consulting;Automotive;50;MagicDraw, Te
 Technical (STEM);10;Architect;France;500+;Automotive;Automotive;15;Enterprise Architect;13-24;25000;medium
 Technical (STEM);10;Senior Software Eng.;Germany;500+;Industrial Robotics;Robotics;10;Eclipse;25-36;Hundred thousand lines (rough estimation);medium
 Technical (STEM);15;Research;Belgium;100-249;R&D;Manufacturing;3;Eclipse;25-36;;large
-Technical (STEM);3;Senior Software Eng.;;500+;R&D;Robotics;5;Eclipse;13-24;;small
+Technical (STEM);3;Senior Software Eng.;nan;500+;R&D;Robotics;5;Eclipse;13-24;;small
 Technical (STEM);2;Senior Software Eng.;USA;500+;Medical Devices;Healthcare;3;Enterprise Architect;13-24;3.5K LoC;small
 Technical (STEM);15;Architect;Japan;500+;Automotive;Automotive;30;Rhapsody;37-48;Confidential;large
 Technical (STEM);20;Research;France;500+;Software;CPS;32;Eclipse;25-36;32 components;large

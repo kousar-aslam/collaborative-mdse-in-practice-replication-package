@@ -43,10 +43,15 @@ def preprocess():
         'United States' : 'USA',
         'U.S.' : 'USA'
     }
+    fullReplace = {
+        'NL' : 'Netherlands'
+    }
     for country in countries:
         analysisData.iloc[:, 3] = analysisData.iloc[:, 3].map(lambda x: country if re.search(country, str(x), re.IGNORECASE) else x)
     for original, replacement in replacements.items():
         analysisData.iloc[:, 3] = analysisData.iloc[:, 3].map(lambda x: replacement if re.search(original, str(x), re.IGNORECASE) else x)
+    for original, replacement in fullReplace.items():
+        analysisData.iloc[:, 3] = analysisData.iloc[:, 3].map(lambda x: replacement if str(x).strip()==original else str(x).strip())
         
     #Column 4: Company size (nominal, category). Preprocessing: nothing.
     
