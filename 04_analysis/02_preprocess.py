@@ -17,10 +17,10 @@ def preprocess():
     #Column 2: Role (nominal, category). Preprocessing: bring similar roles to a common form.
     roles = ['Architect', 'Director', 'Research']
     replacements = {
-        'Principal Software Engineer' : 'Senior Software Engineer',
-        'Senior Software Developer' : 'Senior Software Engineer',
-        'Senior Developer' : 'Senior Software Engineer',
-        'Senior Development Engineee' : 'Senior Software Engineer',
+        'Principal Software Engineer' : 'Senior Software Eng.',
+        'Senior Software Developer' : 'Senior Software Eng.',
+        'Senior Developer' : 'Senior Software Eng.',
+        'Senior Development Engineee' : 'Senior Software Eng.',
         'Team Lead' : 'Team/Tech Lead',
         'Group Lead' : 'Team/Tech Lead',
         'Head of' : 'Team/Tech Lead',
@@ -56,7 +56,7 @@ def preprocess():
         'Telecoms' : 'Telecom',
         'Telecom.' : 'Telecom',
         'IT Consultancy' : 'Consulting',
-        'safety-critical system engineering' : 'Safety-critical systems',
+        'safety-critical system engineering' : 'Safety-crit. sys.',
         'Communication network design' : 'Networks',
         'IT Services' : 'IT',
         'Information technology' : 'IT',
@@ -79,7 +79,7 @@ def preprocess():
         'Medical' : 'Healthcare',
         'Health' : 'Healthcare',
         'driving' : 'Automotive',
-        'Communication' : 'Telecommunication',
+        'Communication' : 'Telecom',
         'BFSI' : 'Finance',
         'Software modelling tool' : 'Software tools',
         'Software publisher' : 'Software tools'
