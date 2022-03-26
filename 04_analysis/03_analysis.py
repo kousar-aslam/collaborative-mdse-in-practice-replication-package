@@ -5,6 +5,7 @@ import numpy as np
 import os
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
+import statistics
 
 fileLocation = '../03_data'
 data = pd.read_csv('{}/data-preprocessed.csv'.format(fileLocation), sep=';')
@@ -98,7 +99,8 @@ def chartData(data, settings):
             counter = plotData[category]
             
             values = [element[1] for element in counter]
-            labels = ['{} ({})'.format(element[0], element[1]) for element in counter]
+            sumFrequencies = sum(values)
+            labels = ['{} \u2014 {} ({}%)'.format(element[0], element[1], round((element[1]/sumFrequencies)*100)) for element in counter]
             #Get the regular labels and values by: labels, values = zip(*counter)
             
             #Prepare bar chart
@@ -161,8 +163,17 @@ def chartData(data, settings):
         plt.savefig('{}/{}.pdf'.format(outputLocation, fileName))
         plt.show()  #Turn this off in final code or make it optional
 
+
 chartData(data, [
     (['background', 'role'], '#85d4ff', 'person'),
     (['location', 'companySize', 'sector', 'domain'], '#ffa1c0', 'company'),
     (['tools', 'projectLength', 'modelSize'], '#ffdd47', 'model-project')]
 )
+
+
+def printNumericStats():
+    print('Mean experience: {}.'.format(statistics.mean(data['experience'])))
+    print('Std experience: {}.'.format(statistics.pstdev(data['experience'])))
+    
+    print('Mean collaborators: {}.'.format(statistics.mean(data['collaborators'])))
+    print('Std collaborators: {}.'.format(statistics.pstdev(data['collaborators'])))
