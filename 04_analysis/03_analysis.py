@@ -17,7 +17,8 @@ if not os.path.exists(outputLocation):
 #collection for non-default category thresholds
 thresholds = {
     'companySize' : 0,
-    'projectLength' : 0
+    'projectLength' : 0,
+    'tools' : 2
 }
 
 #collection for non-default order categories
