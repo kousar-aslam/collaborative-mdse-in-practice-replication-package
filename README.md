@@ -9,8 +9,9 @@ The full dataset, analysis scripts, raw results, and transcripts of the focus gr
 
 ### Questionnaire
 * `/02_questionnaire`
-   * `questionnaire.pdf` - The questionnaire used in the online survey.
+   * `Questionnaire.pdf` - The questionnaire used in the online survey.
    * `Collaborative Model-Driven Software Engineering - An Overview.pdf` - The overview the participants were provided with.
+   * `Classification Framework - Definitions.pdf` - Definition of terms of the classification framework.
 
 ### Data
 
