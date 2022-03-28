@@ -76,7 +76,7 @@ def preprocess():
         analysisData.iloc[:, 5] = analysisData.iloc[:, 5].map(lambda x: replacement if re.search(original, str(x), re.IGNORECASE) else x)
         
     #Column 6: Primary application domain (nominal, category). Preprocessing: bring similar roles to a common form.
-    sectors = ['Automotive']
+    domains = ['Automotive']
     replacements = {
         'Automative' : 'Automotive',
         'Robot' : 'Robotics',
@@ -89,8 +89,8 @@ def preprocess():
         'Software modelling tool' : 'Software tools',
         'Software publisher' : 'Software tools'
     }
-    for sector in sectors:
-        analysisData.iloc[:, 6] = analysisData.iloc[:, 6].map(lambda x: sector if re.search(sector, str(x), re.IGNORECASE) else x)
+    for domain in domains:
+        analysisData.iloc[:, 6] = analysisData.iloc[:, 6].map(lambda x: domain if re.search(domain, str(x), re.IGNORECASE) else x)
     for original, replacement in replacements.items():
         analysisData.iloc[:, 6] = analysisData.iloc[:, 6].map(lambda x: replacement if re.search(original, str(x), re.IGNORECASE) else x)
 
@@ -105,23 +105,28 @@ def preprocess():
     analysisData.iloc[:, 7] = analysisData.iloc[:, 7].map(lambda x: re.findall("[0-9]+", str(x))[0])
     
     #Column 8: Tools (nominal, category). Preprocessing: split comma-separated values, bring similar roles to a common form.
+    fullReplace = {
+        'Enterprise Architect (Sparx)' : 'Enterprise Architect',
+        'UAModeler + Sublime Text + Visio' : 'UAModeler, Sublime Text, Visio',
+        'Proprietary (vendor), ISA-88, ISA-95' : 'Proprietary',
+        'proprietery technology' : 'Proprietary',
+        'Enterprise Architect + home-grown AUTOSAR tool' : 'Enterprise Architect, Custom AUTOSAR tool'
+    }
     replacements = {
         'enterprise architect' : 'Enterprise Architect',
         'Entreprise arc' : 'Enterprise Architect',
         'MagidDraw' : 'MagicDraw',
         'MagicDraw with Teamwork Cloud' : 'MagicDraw, Teamwork Cloud',
-        'MagicDraw / Cameo' : 'MagicDraw, Cameo'
+        'MagicDraw / Cameo' : 'MagicDraw, Cameo',
+        'Teanwork Cloud' : 'Teamwork Cloud',
+        'Custom AUTOSAR tool' : 'Custom tool',
+        'Homegrown MDSD platform' : 'Custom tool',
+        'Custom platform' : 'Custom tool'
         }
-    fullReplace = {
-        'Enterprise Architect (Sparx)' : 'Enterprise Architect',
-        'UAModeler + Sublime Text + Visio' : 'UAModeler, Sublime Text, Visio',
-        'Proprietary (vendor), ISA-88, ISA-95' : 'Proprietary',
-        'proprietery technology' : 'Proprietary'
-    }
-    for original, replacement in replacements.items():
-        analysisData.iloc[:, 8] = analysisData.iloc[:, 8].map(lambda x: str(x).strip().replace(original, replacement) if re.search(original, str(x), re.IGNORECASE) else x.strip())
     for original, replacement in fullReplace.items():
         analysisData.iloc[:, 8] = analysisData.iloc[:, 8].map(lambda x: replacement if x.strip()==original else x.strip())
+    for original, replacement in replacements.items():
+        analysisData.iloc[:, 8] = analysisData.iloc[:, 8].map(lambda x: str(x).strip().replace(original, replacement) if re.search(original, str(x), re.IGNORECASE) else x.strip())
     
     #Column 9: Project length (nominal, category). Preprocessing: nothing.
     

@@ -4,9 +4,9 @@ Technical (STEM);15;Architect;Sweden;500+;Telecom;Networking;5;Rational Rhapsody
 Technical (STEM);21;Architect;USA;500+;Aerospace and Defense;Model Based Systems Engineering;40;Eclipse, openCAESAR, Modelica, MagicDraw;61+;100s of components;large
 Technical (STEM);12;CEO;Italy;1-9;Consulting;Healthcare;3;Jetbrains MPS;37-48;;large
 Technical (STEM);25;Consultant;Across Europe;10-24;Software;Automotive;10;MetaEdit+;4-12;ADAS system;large
-Business;18;CTO;Hungary;500+;Automotive;Automotive;15;Enterprise Architect + home-grown AUTOSAR tool;25-36;1M LOC (embededded C), or 200 AUTOSAR SW Components;medium
+Business;18;CTO;Hungary;500+;Automotive;Automotive;15;Enterprise Architect, Custom tool;25-36;1M LOC (embededded C), or 200 AUTOSAR SW Components;medium
 Technical (STEM);12;Research;Belgium;100-249;R&D;Manufacturing;5;Eclipse;25-36;Typically multiple software projects per research project. Each is rather small.;medium
-Technical (STEM);27;Research;India;500+;Consulting;Finance;100;Homegrown MDSD platform;25-36;Several million lines of code;large
+Technical (STEM);27;Research;India;500+;Consulting;Finance;100;Custom tool;25-36;Several million lines of code;large
 Technical (STEM);27;Architect;Netherlands;1-9;industry;embedded software;5;Enterprise Architect;25-36;20 Mloc;medium
 Technical (STEM);3;Requirements engineer;nan;1-9;IT;Education;5;Eclipse;4-12;;small
 Technical (STEM);8;Senior Software Engineer;USA;500+;MBSE;Software tools;10;Simulink, System Composer;4-12;;large
@@ -30,12 +30,12 @@ Technical (STEM);15;Team/Tech Lead;Luxembourg;10-24;Machine learning;IoT;4;Propr
 Technical (STEM);15;Director;Hungary;50-99;Safety-crit. sys.;Locomotive;10;Magicdraw;25-36;100k-500k loc;large
 Business;3;Research;Hungary;25-49;Safety-critical systems;Transportation;60;MagicDraw;25-36;;large
 Technical (STEM);8;Senior Software Eng.;Hungary;50-99;Networks;Telecom;20;Eclipse;61+;300k lines of code;medium
-Technical (STEM);8;Team/Tech Lead;Hungary;50-99;IT;Automotive;3;Teanwork Cloud;4-12;23 system;small
+Technical (STEM);8;Team/Tech Lead;Hungary;50-99;IT;Automotive;3;Teamwork Cloud;4-12;23 system;small
 Technical (STEM);34;CEO;Canada;1-9;Cyber-physical systems;Telecom;50;Eclipse, IBM RSA RTE;37-48;Cannot provide info due to confidentiality constraints;large
 Technical (STEM);15;Consultant;Germany;1-9;Consulting;Finance;10;Jetbrains MPS;13-24;10000 Data Fields;large
 Technical (STEM);10;Team/Tech Lead;Germany;100-249;IT;;200;Jetbrains MPS;37-48;Roughly 250 software components with a focus on their interfaces not their internal behaviour;medium
 Technical (STEM);15;CTO;Germany;100-249;Mission-critical systems;Automotive;50;Eclipse, Jetbrains MPS;25-36;5M LOC;large
-Business;20;Director;Canada;25-49;Telecom;Networking;10;Eclipse, Custom platform;4-12;500k lines of code;large
+Business;20;Director;Canada;25-49;Telecom;Networking;10;Eclipse, Custom tool;4-12;500k lines of code;large
 Technical (STEM);13;Architect;Austria;25-49;IT;Industry;5;Eclipse;13-24;?;large
 Researcher;17;Research;India;500+;IT;Finance;5;Eclipse, Jetbrains MPS;13-24;200KSLOC;medium
 Technical (STEM);10;Architect;Netherlands;250-499;IT;Healthcare;5;Enterprise Architect, archie;4-12;7 components;small
