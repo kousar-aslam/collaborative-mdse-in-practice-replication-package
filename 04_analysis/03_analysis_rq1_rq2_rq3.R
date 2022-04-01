@@ -13,7 +13,7 @@ library(ggrepel)
 
 ############## Data ##############
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-data <- read.csv2("../03_data/data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
+data <- read.csv2("../03_data/questionnaire_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
 #data <- data[32:39,]
 
 
@@ -500,17 +500,23 @@ for (i in 1:length(dimensions)){
 ############## Main ##############
 print("Starting...")
 
-if(file.exists("../05_output")){
-  unlink("../05_output", recursive = TRUE)
+outputFolders = c('aggregated', 'aggregated/xlsx', 'likert', 'tables-txt', 'tables-latex', 'tables-latex/aggregated', 'plots')
+
+for (f in outputFolders){
+  folder = paste("../05_output", f, sep="/")
+  if(file.exists(folder)){
+    unlink(folder, recursive = TRUE)
+  }
 }
-dir.create("../05_output", showWarnings = FALSE)
-dir.create("../05_output/aggregated", showWarnings = FALSE)
-dir.create("../05_output/aggregated/xlsx", showWarnings = FALSE)
-dir.create("../05_output/likert", showWarnings = FALSE)
-dir.create("../05_output/tables-txt", showWarnings = FALSE)
-dir.create("../05_output/tables-latex", showWarnings = FALSE)
-dir.create("../05_output/tables-latex/aggregated", showWarnings = FALSE)
-dir.create("../05_output/plots/", showWarnings = FALSE)
+
+if(!file.exists("../05_output")){
+  dir.create("../05_output", showWarnings = FALSE)
+}
+for (f in outputFolders){
+  folder = paste("../05_output", f, sep="/")
+  dir.create(folder, showWarnings = FALSE)
+}
+
 
 
 

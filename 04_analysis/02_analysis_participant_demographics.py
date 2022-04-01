@@ -6,11 +6,15 @@ import os
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
 import statistics
+import shutil
 
 fileLocation = '../03_data'
-data = pd.read_csv('{}/data-preprocessed.csv'.format(fileLocation), sep=';')
+data = pd.read_csv('{}/demographics_data.csv'.format(fileLocation), sep=';')
 
-outputLocation = '../05_output/descriptive'
+outputLocation = '../05_output/demographics'
+if os.path.exists(outputLocation):
+    #os.rmdir(outputLocation)
+    shutil.rmtree(outputLocation)
 if not os.path.exists(outputLocation):
     os.makedirs(outputLocation)
 
@@ -162,7 +166,7 @@ def chartData(data, settings):
             plt.gcf().tight_layout()
 
         plt.savefig('{}/{}.pdf'.format(outputLocation, fileName))
-        plt.show()  #Turn this off in final code or make it optional
+        #plt.show()  #Turn this off in final code or make it optional
 
 
 chartData(data, [
