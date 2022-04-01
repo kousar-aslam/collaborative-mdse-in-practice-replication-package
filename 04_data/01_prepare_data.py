@@ -326,11 +326,122 @@ def prepareStudiesData():
     """Persist data"""
     fileName = 'studies_data'
     fullGrouped.to_excel('{}/{}.xlsx'.format(fileLocation, fileName), index=False)
-
+    
+def occurrences(df, column, pattern=None):
+    if pattern:
+        return int(df[column].str.count(pattern).sum())
+    else:
+        return df[column].count()
+    
 def preprocessStudiesData():
-    pass
+    data = pd.read_excel('{}/studies/studies_data.xlsx'.format(dataLocation))
+    
+    features = {}
+    
+    ################################################################################
+    """MODEL MANAGEMENT"""
+    
+    """Models and languages"""
+    #Collaboration at the model level
+    features['collab-model'] = occurrences(data, 'Collaboration subject', 'M1')
+    #Collaboration at the metamodel level
+    features['collab-metamodel'] = occurrences(data, 'Collaboration subject', 'M3|M2')
+    #Multi-view modeling (e.g. different views for different stakeholders)
+    features['mvm'] = occurrences(data, 'Multi-view scenarios', 'MULTI-VIEW')
+    #Import of an external language into the modeling environment
+    features['import'] = occurrences(data, 'Language(s) adaptation', 'IMPORT')
+    
+    """Model manipulation"""
+    #Model validation
+    features['validation'] = occurrences(data, 'Validation support')
+    
+    """Editors and modeling environments"""
+    #Visual editors
+    features['editor-visual'] = occurrences(data, 'Editor type', 'GRA')
+    #Textual editors
+    features['editor-textual'] = occurrences(data, 'Editor type', 'TEX')
+    #Tabular editors
+    features['editor-tab'] = occurrences(data, 'Editor type', 'TAB')
+    #Tree-based editors
+    features['editor-tree'] = occurrences(data, 'Editor type', 'TREE')
+    #Sketch-based editors
+    features['editor-sketch'] = occurrences(data, 'Editor type', 'SKE')
+    #Editors supporting multiple types of notations
+    features['editor-multi'] = occurrences(data, 'Editor type', ',')
+    #Desktop-based modeling environments
+    features['device-desktop'] = occurrences(data, 'Client type', 'DESKTOP')
+    #Web-based modeling environments
+    features['device-web'] = occurrences(data, 'Client type', 'BROWSER')
+    #Mobile device based modeling environments
+    features['device-mobile'] = occurrences(data, 'Client type', 'MOBILE')
+    
+    ################################################################################
+    """COLLABORATION"""
+    """Stakeholder management & access control"""
+    #User presence visualization
+    features['user-presence'] = occurrences(data, 'Workspace awareness', 'USERS | UPED | HSE')
+
+    """Collaboration dynamics"""
+    features['human-machine-collab'] = occurrences(data, 'Collaborating parties', 'HUMAN-MACHINE')
+    
+    """Versioning"""
+    #Internal versioning support
+    features['versioning-internal'] = occurrences(data, 'Versioning support', 'INTERNAL')
+    #Model differencing based on the modeling language, not on the file contents
+    features['versioning-models'] = occurrences(data, 'Versioning support', 'MODELS')
+    #Model differencing
+    features['diff'] = occurrences(data, 'Diff/merge domain')
+    #Model merging
+    features['merge'] = occurrences(data, 'Model merging support', 'YES')
+    #Version branching
+    features['branching'] = occurrences(data, 'Branching')
+    
+    """Conflicts and consistency"""
+    #Locking
+    features['locking'] = occurrences(data, 'Locking')
 
 
-preprocessQuestionnaireData()
-prepareStudiesData()    
+    
+    ################################################################################
+    """COMMUNICATION"""
+    
+    
+    print(features)
+    
+#preprocessQuestionnaireData()
+#prepareStudiesData()    
 preprocessStudiesData()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
