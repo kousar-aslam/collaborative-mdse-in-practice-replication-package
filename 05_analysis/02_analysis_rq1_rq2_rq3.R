@@ -588,56 +588,120 @@ for (i in 1:length(longNames)){
   }
 }
 
+scatterplots <- function(df){
+  for(i in 1:length(dimensions)){
+    a <- df[which(df$dimension==levelsD[[i]]),]
+    
+    p <- ggplot(a, aes(current, need, color=dimension, shape=dimension, fill=dimension)) +
+      geom_point(size=2.5) +
+      scale_shape_manual(values=shapes[i]) +
+      scale_x_continuous(
+        breaks=c(25, 75),
+        minor_breaks = c(50),
+        labels=c('less adopted', 'more adopted'),
+        limits=c(0,100),
+        name = "Adoption") +
+      scale_y_continuous(
+        breaks=c(25, 75),
+        minor_breaks = c(50),
+        labels=c('less needed', 'more needed'),
+        limits=c(0,100),
+        name = "Need") +
+      scale_color_manual(values=colorPalette[i]) +
+      scale_fill_manual(values=colorPalette[i]) +
+      theme_minimal() +
+      theme(axis.text.y = element_text(angle = 90, hjust = 0.5)) +
+      theme(panel.grid.major.x = element_blank()) +
+      theme(panel.grid.major.y = element_blank()) +
+      theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5)) +
+      geom_text_repel(
+        label = a$feature,
+        size=fontsizes[i],
+        colour = "#545454",
+        segment.size=0.2,
+        segment.curvature = -1e-20,
+        segment.ncp = 1,
+        segment.angle = 90,
+        force_pull = 0,
+        min.segment.length = minsegmentlengths[i],
+        max.time = 25,
+        max.iter = 2500000,
+        max.overlaps = 9) +
+      theme(legend.position="none")
+    
+    outputFile <- paste(paste("../06_output/plots/scatterplot_", tolower(dimensions[[i]]), sep=""), ".pdf", sep="")
+    pdf(outputFile, width=7, height=7)
+    
+    print(p)
+    ggsave(outputFile, p)
+    
+    dev.off()
+    
+    j = length(plots)
+    plots[[j+1]] <- p
+  }
+}
+
 plots <- c()
-for(i in 1:length(dimensions)){
-  a <- allDiffsToPrint[which(allDiffsToPrint$dimension==levelsD[[i]]),]
-  p <- ggplot(a, aes(current, need, color=dimension, shape=dimension, fill=dimension)) +
-    geom_point(size=2.5) +
-    scale_shape_manual(values=shapes[i]) +
-    scale_x_continuous(
-      breaks=c(25, 75),
-      minor_breaks = c(50),
-      labels=c('less adopted', 'more adopted'),
-      limits=c(0,100),
-      name = "Adoption") +
-    scale_y_continuous(
-      breaks=c(25, 75),
-      minor_breaks = c(50),
-      labels=c('less needed', 'more needed'),
-      limits=c(0,100),
-      name = "Need") +
-    scale_color_manual(values=colorPalette[i]) +
-    scale_fill_manual(values=colorPalette[i]) +
-    theme_minimal() +
-    theme(axis.text.y = element_text(angle = 90, hjust = 0.5)) +
-    theme(panel.grid.major.x = element_blank()) +
-    theme(panel.grid.major.y = element_blank()) +
-    theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5)) +
-    geom_text_repel(
-      label = a$feature,
-      size=fontsizes[i],
-      colour = "#545454",
-      segment.size=0.2,
-      segment.curvature = -1e-20,
-      segment.ncp = 1,
-      segment.angle = 90,
-      force_pull = 0,
-      min.segment.length = minsegmentlengths[i],
-      max.time = 25,
-      max.iter = 2500000,
-      max.overlaps = 9) +
-    theme(legend.position="none")
-  
-  outputFile <- paste(paste("../06_output/plots/scatterplot_", tolower(dimensions[[i]]), sep=""), ".pdf", sep="")
+scatterplots(allDiffsToPrint)
+
+
+
+studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
+rq3df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
+
+rq3scatterplot <- function(df){
+  for(i in 1:length(dimensions)){
+    a <- df
+    
+    p <- ggplot(a, aes(current, need, color=dimension, shape=dimension, fill=dimension)) +
+      geom_point(size=2.5) +
+      scale_shape_manual(values=shapes) +
+      scale_x_continuous(
+        breaks=c(25, 75),
+        minor_breaks = c(50),
+        labels=c('less adopted', 'more adopted'),
+        limits=c(0,100),
+        name = "Adoption") +
+      scale_y_continuous(
+        breaks=c(25, 75),
+        minor_breaks = c(50),
+        labels=c('less needed', 'more needed'),
+        limits=c(0,100),
+        name = "Need") +
+      scale_color_manual(values=colorPalette) +
+      scale_fill_manual(values=colorPalette) +
+      theme_minimal() +
+      theme(axis.text.y = element_text(angle = 90, hjust = 0.5)) +
+      theme(panel.grid.major.x = element_blank()) +
+      theme(panel.grid.major.y = element_blank()) +
+      theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5)) +
+      geom_text_repel(
+        label = a$feature,
+        size=3,
+        colour = "#545454",
+        segment.size=0.2,
+        segment.curvature = -1e-20,
+        segment.ncp = 1,
+        segment.angle = 90,
+        force_pull = 0,
+        min.segment.length = 0.15,
+        max.time = 25,
+        max.iter = 2500000,
+        max.overlaps = 9) +
+      theme(legend.position="none")
+  }
+  outputFile <- paste("../06_output/plots/scatterplot_rq3", ".pdf", sep="")
   pdf(outputFile, width=7, height=7)
   
   print(p)
   ggsave(outputFile, p)
   
   dev.off()
-  
-  j = length(plots)
-  plots[[j+1]] <- p
 }
+
+plots <- c()
+rq3scatterplot(rq3df)
+
 
 print("Finished.")
