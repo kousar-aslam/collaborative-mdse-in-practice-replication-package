@@ -669,9 +669,9 @@ rq3scatterplot <- function(df){
       scale_x_continuous(
         breaks=c(25, 75),
         minor_breaks = c(50),
-        labels=c('less adopted', 'more adopted'),
+        labels=c('less published', 'more published'),
         limits=c(0,100),
-        name = "Adoption") +
+        name = "Publications (Relative frequency)") +
       scale_y_continuous(
         breaks=c(25, 75),
         minor_breaks = c(50),
