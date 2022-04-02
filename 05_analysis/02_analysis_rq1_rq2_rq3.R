@@ -659,6 +659,11 @@ rq3df[rq3df$feature=="External versioning", "feature"] <- "Ext. versioning"
 rq3df[rq3df$feature=="Internal versioning", "feature"] <- "Intl. versioning"
 rq3df[rq3df$feature=="Commit messages", "feature"] <- "Commit msg"
 
+target <- c("Model management", "Collaboration", "Communication")
+#rq3df <- rq3df[match(target, rq3df$dimension),]
+rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
+
+
 rq3scatterplot <- function(df){
   for(i in 1:length(dimensions)){
     a <- df
@@ -709,8 +714,12 @@ rq3scatterplot <- function(df){
   dev.off()
 }
 
+colorPalette <- c("#f03a02", "#0af002", "#a83287")
+shapes <- c(18, 15, 16)
+
 plots <- c()
 rq3scatterplot(rq3df)
 
+dev.off()
 
 print("Finished.")
