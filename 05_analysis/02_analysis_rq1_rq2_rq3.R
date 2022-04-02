@@ -649,6 +649,15 @@ scatterplots(allDiffsToPrint)
 
 studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
 rq3df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
+rq3df[rq3df$feature=="Web-based environment", "feature"] <- "Web env"
+rq3df[rq3df$feature=="Desktop-based environment", "feature"] <- "Desktop env"
+rq3df[rq3df$feature=="Mobile modeling environment", "feature"] <- "Mobile env"
+rq3df[rq3df$feature=="Importing external languages into the modeling environment", "feature"] <- "Import ext. lang."
+rq3df[rq3df$feature=="Human-Machine collaboration", "feature"] <- "Human-Machine collab"
+rq3df[rq3df$feature=="External communication tools", "feature"] <- "Ext. comm. tools"
+rq3df[rq3df$feature=="External versioning", "feature"] <- "Ext. versioning"
+rq3df[rq3df$feature=="Internal versioning", "feature"] <- "Intl. versioning"
+rq3df[rq3df$feature=="Commit messages", "feature"] <- "Commit msg"
 
 rq3scatterplot <- function(df){
   for(i in 1:length(dimensions)){
@@ -685,7 +694,7 @@ rq3scatterplot <- function(df){
         segment.ncp = 1,
         segment.angle = 90,
         force_pull = 0,
-        min.segment.length = 0.15,
+        min.segment.length = 0.25,
         max.time = 25,
         max.iter = 2500000,
         max.overlaps = 9) +
