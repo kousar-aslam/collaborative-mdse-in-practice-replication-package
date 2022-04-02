@@ -285,6 +285,8 @@ def prepareStudiesData():
     fullGrouped['ID'] = fullGrouped['ID'].map(lambda x: x.split(',')[0])
     #Sum papers
     fullGrouped['Papers'] = fullGrouped['Papers'].map(lambda x: sum(list(map(int, x.split(',')))))
+    
+    fullGrouped['meansofcomm'] = fullGrouped['Communication means - builtin'] + ", " + fullGrouped['Communication means - external'].fillna('') + ", " + fullGrouped['Communication means - mixed'].fillna('') + ", " + fullGrouped['Communication means links'].fillna('') + ", " + fullGrouped['Design decision: discussion'].fillna('')
 
 
     #Remove no words
@@ -294,15 +296,19 @@ def prepareStudiesData():
 
     #Remove synonyms
     synonyms = {
-        'PROJECTIVE' : 'PROJ',
-        'SYNTHETIC' : 'SYN',
-        'TECH' : 'TECHN'
+        'PROJECTIVE' : ['PROJ'],
+        'SYNTHETIC' : ['SYN'],
+        'TECH' : ['TECHN'],
+        'REAL-TIME' : ['SYNCH'],
+        'OFF-LINE AUTOMATED CHANGE PROPAGATION' : ['ASYNEDIT_SYNCONFL', 'ASYNCOMMIT'],
+        'OFF-LINE MANUAL CHANGE PROPAGATION' : ['ASYNC']
     }
     def removeSynonyms(l):
-        for preferred, synonym in synonyms.items():
-            indexes = [l.index(x) for x in l if synonym==x]
-            for i in indexes:
-                l[i] = preferred
+        for preferred, synonymWords in synonyms.items():
+            for synonym in synonymWords:
+                indexes = [l.index(x) for x in l if synonym==x]
+                for i in indexes:
+                    l[i] = preferred
 
     #Remove exact duplicates
     def removeDuplicates(l):
@@ -329,9 +335,9 @@ def prepareStudiesData():
     
 def occurrences(df, column, pattern=None):
     if pattern:
-        return int(df[column].str.count(pattern).sum())
+        return round(100*df[column].str.count(pattern).sum()/len(df), 2)
     else:
-        return df[column].count()
+        return round(100*df[column].count()/len(df), 2)
     
 def preprocessStudiesData():
     data = pd.read_excel('{}/studies/studies_data.xlsx'.format(dataLocation))
@@ -340,108 +346,162 @@ def preprocessStudiesData():
     
     ################################################################################
     """MODEL MANAGEMENT"""
-    
+    features['Model management'] = {}
+    ################################################################################
     """Models and languages"""
     #Collaboration at the model level
-    features['collab-model'] = occurrences(data, 'Collaboration subject', 'M1')
+    features['Model management']['Collaboration at model level'] = occurrences(data, 'Collaboration subject', 'M1')
     #Collaboration at the metamodel level
-    features['collab-metamodel'] = occurrences(data, 'Collaboration subject', 'M3|M2')
+    features['Model management']['Collaboration at metamodel level'] = occurrences(data, 'Collaboration subject', 'M3|M2')
     #Multi-view modeling (e.g. different views for different stakeholders)
-    features['mvm'] = occurrences(data, 'Multi-view scenarios', 'MULTI-VIEW')
+    features['Model management']['MVM'] = occurrences(data, 'Multi-view scenarios', 'MULTI-VIEW')
     #Import of an external language into the modeling environment
-    features['import'] = occurrences(data, 'Language(s) adaptation', 'IMPORT')
+    features['Model management']['Importing external languages into the modeling environment'] = occurrences(data, 'Language(s) adaptation', 'IMPORT')
     
     """Model manipulation"""
     #Model validation
-    features['validation'] = occurrences(data, 'Validation support')
+    features['Model management']['Model validation'] = occurrences(data, 'Validation support')
     
     """Editors and modeling environments"""
     #Visual editors
-    features['editor-visual'] = occurrences(data, 'Editor type', 'GRA')
+    features['Model management']['Visual editors'] = occurrences(data, 'Editor type', 'GRA')
     #Textual editors
-    features['editor-textual'] = occurrences(data, 'Editor type', 'TEX')
+    features['Model management']['Textual editors'] = occurrences(data, 'Editor type', 'TEX')
     #Tabular editors
-    features['editor-tab'] = occurrences(data, 'Editor type', 'TAB')
+    features['Model management']['Tabular editors'] = occurrences(data, 'Editor type', 'TAB')
     #Tree-based editors
-    features['editor-tree'] = occurrences(data, 'Editor type', 'TREE')
+    features['Model management']['Tree-based editors'] = occurrences(data, 'Editor type', 'TREE')
     #Sketch-based editors
-    features['editor-sketch'] = occurrences(data, 'Editor type', 'SKE')
+    features['Model management']['Sketch-based editors'] = occurrences(data, 'Editor type', 'SKE')
     #Editors supporting multiple types of notations
-    features['editor-multi'] = occurrences(data, 'Editor type', ',')
+    features['Model management']['Editors w/ multiple notations'] = occurrences(data, 'Editor type', ',')
     #Desktop-based modeling environments
-    features['device-desktop'] = occurrences(data, 'Client type', 'DESKTOP')
+    features['Model management']['Desktop-based environment'] = occurrences(data, 'Client type', 'DESKTOP')
     #Web-based modeling environments
-    features['device-web'] = occurrences(data, 'Client type', 'BROWSER')
+    features['Model management']['Web-based environment'] = occurrences(data, 'Client type', 'BROWSER')
     #Mobile device based modeling environments
-    features['device-mobile'] = occurrences(data, 'Client type', 'MOBILE')
+    features['Model management']['Mobile modeling environment'] = occurrences(data, 'Client type', 'MOBILE')
     
     ################################################################################
     """COLLABORATION"""
+    features['Collaboration'] = {}
+    ################################################################################
     """Stakeholder management & access control"""
+    #Role-based access control
+    features['Collaboration']['RBAC'] = occurrences(data, 'Roles')
     #User presence visualization
-    features['user-presence'] = occurrences(data, 'Workspace awareness', 'USERS | UPED | HSE')
+    features['Collaboration']['User presence visualization'] = occurrences(data, 'Workspace awareness', 'USERS|UPED|HSE|LOCK')
 
     """Collaboration dynamics"""
-    features['human-machine-collab'] = occurrences(data, 'Collaborating parties', 'HUMAN-MACHINE')
+    #Human-Machine collaboration
+    features['Collaboration']['Human-Machine collaboration'] = occurrences(data, 'Collaborating parties', 'HUMAN-MACHINE')
+    #Real-time collaboration
+    features['Collaboration']['Real-time collab'] = occurrences(data, 'Collaboration types', 'REAL-TIME')
+    #Offline (non-Real-time) collaboration
+    features['Collaboration']['Offline collab'] = occurrences(data, 'Collaboration types', 'OFF-LINE')
     
     """Versioning"""
-    #Internal versioning support
-    features['versioning-internal'] = occurrences(data, 'Versioning support', 'INTERNAL')
-    #Model differencing based on the modeling language, not on the file contents
-    features['versioning-models'] = occurrences(data, 'Versioning support', 'MODELS')
     #Model differencing
-    features['diff'] = occurrences(data, 'Diff/merge domain')
+    features['Collaboration']['Model diff'] = occurrences(data, 'Diff/merge domain')
+    #Model differencing based on the modeling language, not on the file contents
+    features['Collaboration']['Semantic diff'] = occurrences(data, 'Versioning support', 'MODELS')
+    #Internal versioning support
+    features['Collaboration']['Internal versioning'] = occurrences(data, 'Versioning support', 'INTERNAL')
+    #External versioning support
+    features['Collaboration']['External versioning'] = occurrences(data, 'Versioning support', 'EXTERNAL')
     #Model merging
-    features['merge'] = occurrences(data, 'Model merging support', 'YES')
+    features['Collaboration']['Model merging'] = occurrences(data, 'Model merging support', 'YES')
     #Version branching
-    features['branching'] = occurrences(data, 'Branching')
+    features['Collaboration']['Version branching'] = occurrences(data, 'Branching')
+    #History
+    features['Collaboration']['History'] = occurrences(data, 'Design decision: session history')
     
     """Conflicts and consistency"""
     #Locking
-    features['locking'] = occurrences(data, 'Locking')
-
-
+    features['Collaboration']['Locking'] = occurrences(data, 'Locking')
+    #Prevention of conflicts
+    features['Collaboration']['Prevention'] = occurrences(data, 'Conflict mgmt approach', 'PREVENTIVE')
+    #Conflict awareness features['Collaboration'] (for instance, warnings, prompt actions)
+    features['Collaboration']['Conflict awareness'] = occurrences(data, 'Conflict awareness - user')
+    #Automation of conflict resolution
+    features['Collaboration']['Automation of resolution'] = occurrences(data, 'Conflict resolution support', 'AUTO|SEMIAUTOMATED')
+    #Manual conflict resolution
+    features['Collaboration']['Manual resolution'] = occurrences(data, 'Conflict resolution support', 'MANUAL')
+    #Eventual consistency
+    features['Collaboration']['Eventual consistency'] = occurrences(data, 'Consistency model', 'EVENTUAL')
+    
+    """Network architecture & robustness"""
+    #P2P (serverless) network architecture
+    features['Collaboration']['P2P architecture'] = occurrences(data, 'Network architecture', 'P2P|MIXED')
+    #Cloud-based network architecture
+    features['Collaboration']['Cloud architecture'] = occurrences(data, 'Network architecture', 'CENTRALIZED|MIXED')
     
     ################################################################################
     """COMMUNICATION"""
+    features['Communication'] = {}
+    ################################################################################
+    """Synchronous communication"""
+    #Chat
+    features['Communication']['Chat'] = occurrences(data, 'meansofcomm', 'CHAT')
+    #Audio
+    features['Communication']['Audio'] = occurrences(data, 'meansofcomm', 'AUDIO')
+    #Voice
+    features['Communication']['Audio'] = occurrences(data, 'meansofcomm', 'VOICE')
+    #Hand gestures
+    features['Communication']['Hand gestures'] = occurrences(data, 'meansofcomm', 'HANDGESTURES')
+    #Face-to-face
+    features['Communication']['Face-to-face'] = occurrences(data, 'meansofcomm', 'FACE-TO-FACE')
+    #Change review sessions
+    features['Communication']['Reviews'] = occurrences(data, 'meansofcomm', 'REVIEWS')
+    #Screen sharing
+    features['Communication']['Screen sharing'] = occurrences(data, 'meansofcomm', 'AVTOOL')
     
+    """Asynchronous communication"""
+    #Email
+    features['Communication']['Email'] = occurrences(data, 'meansofcomm', 'EMAIL')
+    #Wiki
+    features['Communication']['Wiki'] = occurrences(data, 'meansofcomm', 'WIKI')
+    #Forum
+    features['Communication']['Forum'] = occurrences(data, 'meansofcomm', 'FORUM')
+    #Proposals
+    features['Communication']['Proposals'] = occurrences(data, 'meansofcomm', 'PROPOSALS')
+    #Voting
+    features['Communication']['Voting'] = occurrences(data, 'meansofcomm', 'VOTING')
+    #Annotations
+    features['Communication']['Annotations'] = occurrences(data, 'meansofcomm', 'ANNOTATIONS')
+    #Comments
+    features['Communication']['Comments'] = occurrences(data, 'meansofcomm', 'COMMENTS')
+    #Feedback
+    features['Communication']['Feedback'] = occurrences(data, 'meansofcomm', 'FEEDBACK')
+    #Reviews
+    features['Communication']['Reviews'] = occurrences(data, 'meansofcomm', 'REVIEWS')
+    #Call-For-Attention
+    features['Communication']['Call-For-Attention'] = occurrences(data, 'meansofcomm', 'CALLFORATTENTION')
+    #Sticky notes
+    features['Communication']['Sticky notes'] = occurrences(data, 'meansofcomm', 'STICKYNOTES')
+    #Tags
+    features['Communication']['Tags'] = occurrences(data, 'meansofcomm', 'TAGS')
+    #Conflicts table
+    features['Communication']['Conflicts table'] = occurrences(data, 'Workspace awareness', 'CONFLICTLIST')
+    #Multimedia annotations
+    features['Communication']['Multimedia annotations'] = occurrences(data, 'meansofcomm', 'MULTIMEDIAANNOTATIONS')
+    #Commit messages
+    features['Communication']['Commit messages'] = occurrences(data, 'meansofcomm', 'COMMIT MESSAGES')
     
-    print(features)
+    """Integration"""
+    #Communication means built into the modeling tools
+    features['Communication']['Built-in communication tools'] = occurrences(data, 'Communication means - builtin')
+    #Communication means NOT built into the modeling tools
+    features['Communication']['External communication tools'] = occurrences(data, 'Communication means - external')
     
-#preprocessQuestionnaireData()
-#prepareStudiesData()    
+    df = pd.DataFrame(columns=['dimension', 'feature', 'current'])
+    
+    for dimension in features:
+        for feat in features[dimension]:
+            df.loc[len(df)] = [dimension, feat, features[dimension][feat]]
+            
+    df.to_csv('{}/studies_data.csv'.format(dataLocation), sep=';', encoding='utf-8', index=False)
+    
+preprocessQuestionnaireData()
+prepareStudiesData()    
 preprocessStudiesData()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
