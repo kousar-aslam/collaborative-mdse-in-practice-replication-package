@@ -588,7 +588,7 @@ for (i in 1:length(longNames)){
   }
 }
 
-scatterplots <- function(df){
+scatterplots <- function(df, title){
   for(i in 1:length(dimensions)){
     a <- df[which(df$dimension==levelsD[[i]]),]
     
@@ -629,7 +629,7 @@ scatterplots <- function(df){
         max.overlaps = 9) +
       theme(legend.position="none")
     
-    outputFile <- paste(paste("../06_output/plots/scatterplot_", tolower(dimensions[[i]]), sep=""), ".pdf", sep="")
+    outputFile <- paste(paste(paste("../06_output/plots/", title, sep=""), tolower(dimensions[[i]]), sep=""), ".pdf", sep="")
     pdf(outputFile, width=7, height=7)
     
     print(p)
@@ -643,82 +643,25 @@ scatterplots <- function(df){
 }
 
 plots <- c()
-scatterplots(allDiffsToPrint)
+scatterplots(allDiffsToPrint, "scatterplot_")
 
+plots <- c()
+scatterplots(rq3df, "scatterplot_rq3_")
 
 
 studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
 rq3df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
-rq3df[rq3df$feature=="Web-based environment", "feature"] <- "Web env"
-rq3df[rq3df$feature=="Desktop-based environment", "feature"] <- "Desktop env"
-rq3df[rq3df$feature=="Mobile modeling environment", "feature"] <- "Mobile env"
-rq3df[rq3df$feature=="Importing external languages into the modeling environment", "feature"] <- "Import ext. lang."
-rq3df[rq3df$feature=="Human-Machine collaboration", "feature"] <- "Human-Machine collab"
-rq3df[rq3df$feature=="External communication tools", "feature"] <- "Ext. comm. tools"
-rq3df[rq3df$feature=="External versioning", "feature"] <- "Ext. versioning"
-rq3df[rq3df$feature=="Internal versioning", "feature"] <- "Intl. versioning"
-rq3df[rq3df$feature=="Commit messages", "feature"] <- "Commit msg"
+
 
 target <- c("Model management", "Collaboration", "Communication")
 #rq3df <- rq3df[match(target, rq3df$dimension),]
 rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
 
 
-rq3scatterplot <- function(df){
-  for(i in 1:length(dimensions)){
-    a <- df
-    
-    p <- ggplot(a, aes(current, need, color=dimension, shape=dimension, fill=dimension)) +
-      geom_point(size=2.5) +
-      scale_shape_manual(values=shapes) +
-      scale_x_continuous(
-        breaks=c(25, 75),
-        minor_breaks = c(50),
-        labels=c('less published', 'more published'),
-        limits=c(0,100),
-        name = "Publications (Relative frequency)") +
-      scale_y_continuous(
-        breaks=c(25, 75),
-        minor_breaks = c(50),
-        labels=c('less needed', 'more needed'),
-        limits=c(0,100),
-        name = "Need") +
-      scale_color_manual(values=colorPalette) +
-      scale_fill_manual(values=colorPalette) +
-      theme_minimal() +
-      theme(axis.text.y = element_text(angle = 90, hjust = 0.5)) +
-      theme(panel.grid.major.x = element_blank()) +
-      theme(panel.grid.major.y = element_blank()) +
-      theme(panel.border = element_rect(colour = "black", fill=NA, size=0.5)) +
-      geom_text_repel(
-        label = a$feature,
-        size=3,
-        colour = "#545454",
-        segment.size=0.2,
-        segment.curvature = -1e-20,
-        segment.ncp = 1,
-        segment.angle = 90,
-        force_pull = 0,
-        min.segment.length = 0.25,
-        max.time = 25,
-        max.iter = 2500000,
-        max.overlaps = 9) +
-      theme(legend.position="none")
-  }
-  outputFile <- paste("../06_output/plots/scatterplot_rq3", ".pdf", sep="")
-  pdf(outputFile, width=7, height=7)
-  
-  print(p)
-  ggsave(outputFile, p)
-  
-  dev.off()
-}
-
-colorPalette <- c("#f03a02", "#0af002", "#a83287")
-shapes <- c(18, 15, 16)
-
 plots <- c()
 rq3scatterplot(rq3df)
+
+write.xlsx(rq3df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
 
 dev.off()
 
