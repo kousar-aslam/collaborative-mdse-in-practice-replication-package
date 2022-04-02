@@ -645,9 +645,6 @@ scatterplots <- function(df, title){
 plots <- c()
 scatterplots(allDiffsToPrint, "scatterplot_")
 
-plots <- c()
-scatterplots(rq3df, "scatterplot_rq3_")
-
 
 studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
 rq3df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
@@ -657,9 +654,9 @@ target <- c("Model management", "Collaboration", "Communication")
 #rq3df <- rq3df[match(target, rq3df$dimension),]
 rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
 
-
 plots <- c()
-rq3scatterplot(rq3df)
+scatterplots(rq3df, "scatterplot_rq3_")
+
 
 write.xlsx(rq3df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
 
