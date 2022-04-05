@@ -446,7 +446,7 @@ def preprocessStudiesData():
     #Audio
     features['Communication']['Audio'] = occurrences(data, 'meansofcomm', 'AUDIO')
     #Voice
-    features['Communication']['Audio'] = occurrences(data, 'meansofcomm', 'VOICE')
+    features['Communication']['Voice'] = occurrences(data, 'meansofcomm', 'VOICE')
     #Hand gestures
     features['Communication']['Hand gestures'] = occurrences(data, 'meansofcomm', 'HANDGESTURES')
     #Face-to-face
