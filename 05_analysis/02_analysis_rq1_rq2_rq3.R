@@ -588,7 +588,7 @@ for (i in 1:length(longNames)){
   }
 }
 
-scatterplots <- function(df, title){
+scatterplots <- function(df, title, xtitle, xleft, xright){
   for(i in 1:length(dimensions)){
     a <- df[which(df$dimension==levelsD[[i]]),]
     
@@ -598,9 +598,9 @@ scatterplots <- function(df, title){
       scale_x_continuous(
         breaks=c(25, 75),
         minor_breaks = c(50),
-        labels=c('less adopted', 'more adopted'),
+        labels=c(xleft, xright),
         limits=c(0,100),
-        name = "Adoption") +
+        name = xtitle) +
       scale_y_continuous(
         breaks=c(25, 75),
         minor_breaks = c(50),
@@ -643,7 +643,7 @@ scatterplots <- function(df, title){
 }
 
 plots <- c()
-scatterplots(allDiffsToPrint, "scatterplot_")
+scatterplots(allDiffsToPrint, "scatterplot_", "Adoption", "less adopted", "more adopted")
 
 
 studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
@@ -655,7 +655,7 @@ target <- c("Model management", "Collaboration", "Communication")
 rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
 
 plots <- c()
-scatterplots(rq3df, "scatterplot_rq3_")
+scatterplots(rq3df, "scatterplot_rq3_", "Publications (relative frequency)", "less published", "more published")
 
 
 write.xlsx(rq3df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
