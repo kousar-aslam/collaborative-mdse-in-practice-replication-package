@@ -655,7 +655,7 @@ target <- c("Model management", "Collaboration", "Communication")
 rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
 
 plots <- c()
-scatterplots(rq3df, "scatterplot_rq3_", "Publications (relative frequency)", "less published", "more published")
+scatterplots(rq3df, "scatterplot_rq3_", "Support by academic approaches (relative frequency)", "less researched", "more researched")
 
 
 write.xlsx(rq3df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
