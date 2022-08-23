@@ -155,7 +155,7 @@ def chartData(data, settings):
             ax = plt.gca()
             labels=ax.get_yticklabels()+ax.get_xticklabels()
             for label in labels:
-                label.set_fontsize(10)
+                label.set_fontsize(13)
             
             """
             Sizing and plotting
