@@ -37,7 +37,7 @@ Install Python requirements before running the scripts by running `pip install -
    * `questionnaire_data.csv` – Data file containing pre-processed and cleaned questionnaire data.
    * `studies_data.csv` – Data file containing data about academic output.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Introduce changes.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00)
 
 ### Analysis scripts
 
