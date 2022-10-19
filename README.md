@@ -13,7 +13,7 @@ Install Python requirements before running the scripts by running `pip install -
 ### Classification framework
 * `/02_classification_framework` - Classification framework and definitions of terms.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00) Add warnings about R2.08 and R2.09.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00) Updated in the Overleaf project and added a new PDF here.
 
 ### Questionnaire
 * `/03_questionnaire`
@@ -40,9 +40,10 @@ Install Python requirements before running the scripts by running `pip install -
 
 * `/05_analysis` - Analysis scripts.
    * `/01_analysis_participant_demographics.py` - Charts of some demographic and descriptive statistics of the participants, their companies, the tools used, model sizes, etc.
-   * `/02_analysis_rq1_rq2_rq3.R` - .R script producing PDF, Excel, LaTeX and .txt reports into folder `/06_output`.
+   * `/02_generate_latex_tables.py` - Generates LaTeX tables used in the paper.
+   * `/03_analysis_RQs.R` - .R script for analyzing the RQs. Produces Likert plots, need-adoption matrices, and Excel reports into folder `/06_output`.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Introduce changes.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00)
 
 ### Results
 
@@ -50,13 +51,13 @@ Upon running the analysis scripts, the following directory structure is produced
 * `/06_output`
    * `/aggregated` - Aggregated descriptive statistics of the three dimensions.
       * `/xlsx/Aggregated.xlsx` - Adoption and needs aggregated over every feature group, in an Excel table for allowing further inspection and exploration.
-   * `/descriptive` - Demographic and descriptive statistics of the participants, their companies, the tools used, model sizes, etc.
+      * `/xlsx/Studies.xlsx` - Publication output and needs aggregated over every feature group, in an Excel table for allowing further inspection and exploration.
+   * `/demographics` - Demographic statistics of the participants, their companies, the tools used, model sizes, etc.
    * `/likert` - Likert charts in PDF files with the adoption-need pairs of feature groups charted next to each other.
-   * `/tables-latex` - Adoption and needs for every category, in LaTeX tables.
-      * `/aggregated` - Adoption and needs aggregated over every feature group, ordered by the different metrics, in LaTeX tables.
-   * `/tables-txt` - Adoption and needs for every feature group, in .txt files.
+   * `/likert-annotated` - Likert charts annotated with feature labels.
+   * `/tables` - LaTeX tables used in the paper.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Introduce changes.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00)
 
 ### References
 [1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
