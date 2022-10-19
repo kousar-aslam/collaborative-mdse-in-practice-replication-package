@@ -144,6 +144,16 @@ def preprocessQuestionnaireData():
     #Save analysis data as CSV for the Demographics analysis
     analysisData.to_csv('{}/demographics_data.csv'.format(dataLocation), sep=';', encoding='utf-8', index=False)
     
+    #Move Projectional editing from "Models and languages" to "Editors and modeling environments"
+    #Col from index 19 to index 39
+    data.insert(39, 'Editors and modeling environments [Projectional editing]-current', '0')
+    data['Editors and modeling environments [Projectional editing]-current'] = data['Models and languages [Projectional editing]']
+    data = data.drop(columns=['Models and languages [Projectional editing]'])
+    #Col from index 49 to index 69
+    data.insert(69, 'Editors and modeling environments [Projectional editing]-need', '0')
+    data['Editors and modeling environments [Projectional editing]-need'] = data['Models and languages [Projectional editing].1']
+    data = data.drop(columns=['Models and languages [Projectional editing].1'])
+
     #Save full data file as CSV for the R analysis
     data.to_csv('{}/questionnaire_data.csv'.format(dataLocation), sep=';', encoding='utf-8', index=False)
 
@@ -332,7 +342,7 @@ def prepareStudiesData():
             fullGrouped[column] = fullGrouped[column].map(lambda x: ", ".join(transform(x)))
 
     """Persist data"""
-    fileName = 'studies_data'
+    fileName = 'studies_data_raw'
     fullGrouped.to_excel('{}/{}.xlsx'.format(fileLocation, fileName), index=False)
     
 def occurrences(df, column, pattern=None):
@@ -342,7 +352,7 @@ def occurrences(df, column, pattern=None):
         return round(100*df[column].count()/len(df), 2)
     
 def preprocessStudiesData():
-    data = pd.read_excel('{}/studies/studies_data.xlsx'.format(dataLocation))
+    data = pd.read_excel('{}/studies/studies_data_raw.xlsx'.format(dataLocation))
     
     features = {}
     
