@@ -31,8 +31,8 @@ Install Python requirements before running the scripts by running `pip install -
       *  `/02_extension_to_orignial_2021.xlsx` - Extension to `01_original_2016.xlsx` collected in [2].
       *  `/03_update_2021.xlsx` - Original data from [2] augmenting the classification framework of [1] with new categories.
       *  `/04_extension_to_original_2022.xlsx` - Extracted data for the current study. These categories were introduced in [2] but were not extracted for [1] retrospectively.
-   * `/00_remove_sensitive_information.py` - Removes sensitive information from `questionnaire/questionnaire_data_raw.xlsx` and saves the clean data in `questionnaire/questionnaire_data.xlsx`.
-   * `/01_prepare_data.py` - Pre-processes questionnaire data for the analysis of demographics (and outputs `demographics_data.csv`) and for the analysis of RQ1, RQ2, RQ3 (and outputs `questionnaire_data.csv`); consolidates data from the studies (and outputs `studies/studies_data.xlsx`); pre-processes consolidated studies data for RQ3 (and outputs `studies_data.csv`).
+   * `/00_remove_sensitive_information.py` - Removes sensitive information from `questionnaire/questionnaire_data_raw.xlsx` and saves the clean data in `questionnaire/questionnaire_data.xlsx`. (The `questionnaire/questionnaire_data_raw.xlsx` file is removed from the final public package.)
+   * `/01_prepare_data.py` - Pre-processes questionnaire data for the analysis of demographics (and outputs `demographics_data.csv`) and for the analysis of the RQs (and outputs `questionnaire_data.csv`). Consolidates data from the studies (and outputs `studies/studies_data.xlsx`). Pre-processes consolidated studies data for RQ4 (and outputs `studies_data.csv`).
 
 ![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Introduce changes.
 
