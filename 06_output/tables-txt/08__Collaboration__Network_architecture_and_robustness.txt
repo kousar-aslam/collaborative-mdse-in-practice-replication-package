@@ -1,4 +1,0 @@
-"feature"	"current"	"need"	"diff"
-"Cloud-based architecture"	51.35	84.21	32.86
-"Failure recovery"	36.36	72.97	36.61
-"P2P architecture"	10.81	34.29	23.47
