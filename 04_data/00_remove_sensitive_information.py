@@ -1,5 +1,7 @@
-import openpyxl
 import csv
+
+import openpyxl
+
 
 def sensitive_data():
     return [(182, 4)]
