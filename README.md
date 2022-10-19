@@ -8,7 +8,7 @@ Install Python requirements before running the scripts by running `pip install -
 ### Transcripts
 * `/01_transcripts` - Anonymized transcripts of the focus group sessions.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Add warnings.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00) Added warnings in a README in the folder.
 
 ### Classification framework
 * `/02_classification_framework` - Classification framework and definitions of terms.
@@ -20,7 +20,7 @@ Install Python requirements before running the scripts by running `pip install -
    * `Questionnaire.pdf` - The questionnaire used in the online survey.
    * `Collaborative Model-Driven Software Engineering - An Overview.pdf` - The overview the participants were provided with.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–TODO!!!&color=ff0000) Add warnings.
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00) Added warnings in a README in the folder.
 
 ### Data
 
