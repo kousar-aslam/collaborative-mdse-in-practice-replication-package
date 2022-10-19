@@ -14,7 +14,6 @@ library(ggrepel)
 ############## Data ##############
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 data <- read.csv2("../04_data/questionnaire_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
-#data <- data[32:39,]
 
 
 ############## Functions ##############
@@ -37,7 +36,7 @@ produceOutput <- function(dimension, aspect, features, featuresC, featuresN){
   names(featureNeeds)<-c('feature', 'needs')
   
   plotLikert(dimension, aspect, features, featuresC, likertC, featuresN, likertN, featureCurrent)
-  needTxtLatex(dimension, aspect, features, featuresC, likertC, featuresN, likertN, featureCurrent, featureNeeds)
+  calculateDiffs(dimension, aspect, features, featuresC, likertC, featuresN, likertN, featureCurrent, featureNeeds)
   index <<- index+1
 }
 
@@ -111,8 +110,8 @@ plotLikert <- function(dimension, aspect, features, featuresC, likertC, features
 }
 
 
-# Generates .txt and .tex output for the diff in single aspects
-needTxtLatex <- function(dimension, aspect, features, featuresC, likertC, featuresN, likertN, featureCurrent, featureNeeds){
+# Calculates diff in single aspects
+calculateDiffs <- function(dimension, aspect, features, featuresC, likertC, featuresN, likertN, featureCurrent, featureNeeds){
   featureCurrent <- featureCurrent[order(featureCurrent$feature),]
   featureNeeds <- featureNeeds[order(featureNeeds$feature),]
   
@@ -150,12 +149,6 @@ needTxtLatex <- function(dimension, aspect, features, featuresC, likertC, featur
   
   cols.dont.want <- "wdiff"
   diff <- diff[, !names(diff) %in% cols.dont.want, drop=F]
-  
-  needFileName = paste("../06_output/tables-txt", paste(paste(str_pad(index, 2, pad="0"), dimension, aspect, sep="__"), "txt", sep="."), sep="/")
-  write.table(diff, file = needFileName, sep = "\t", row.names = FALSE)
-  
-  needLatexFileName = paste("../06_output/tables-latex", paste(paste(str_pad(index, 2, pad="0"), dimension, aspect, sep="__"), "tex", sep="."), sep="/")
-  latexTable(diff, fileName = needLatexFileName, caption = paste(dimension, aspect, sep="__"), label = paste(tolower(dimension), tolower(aspect), sep="__"), dimension = FALSE)
 }
 
 
@@ -166,147 +159,6 @@ difference <- function(need, current){
 
 expertWeightedDifference <- function(need, current){
   return(difference(need, current) * (need/100))
-}
-
-
-# Generates LaTeX table for diff data
-latexTable <- function(diffData, fileName, caption, label, dimension = TRUE) {
-  cols.dont.want <- "wdiff"
-  diffData <- diffData[, !names(diffData) %in% cols.dont.want, drop=F]
-  cat("% Add this to preamble:
-  %\\makeatletter
-  %\\newcommand\\notsotiny{\\@setfontsize\\notsotiny{7}{7.5}}
-  %\\makeatother\n
-  \\begin{table*}[]
-  \\centering
-  \\notsotiny
-  ", file=fileName)
-  captionLine <- paste(paste("\\caption{",caption), ".}\n", sep="")
-  cat(captionLine, file=fileName, append = TRUE)
-  labelLine <- paste(paste("\\label{tab:", label, sep=""), "}\n", sep="")
-  cat(labelLine, file=fileName, append = TRUE)
-  if(dimension){
-    cat("\\begin{tabular}{|l|l|l|l|l|l|}", file=fileName, append = TRUE)
-  }else{
-    cat("\\begin{tabular}{|l|l|l|l|}", file=fileName, append = TRUE)
-  }
-  cat("
-  \\hline
-  \\rowcolor[HTML]{C0C0C0}", file=fileName, append = TRUE)
-  if(dimension){
-    cat("
-    \\multicolumn{1}{|c|}{Dimension} & \\multicolumn{1}{c|}{Aspect} & \\multicolumn{1}{c|}{Feature} & \\multicolumn{1}{c|}{Current} & \\multicolumn{1}{c|}{Need} & \\multicolumn{1}{c|}{$\\Delta$} \\\\ \\hline
-    ", file=fileName, append = TRUE)
-  }else{
-    cat("
-    \\multicolumn{1}{|c|}{Feature} & \\multicolumn{1}{c|}{Current} & \\multicolumn{1}{c|}{Need} & \\multicolumn{1}{c|}{$\\Delta$} \\\\ \\hline
-  ", file=fileName, append = TRUE)
-  }
-  write.table(diffData, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \\hline \n")
-  cat("\\end{tabular}%
-  \\end{table*}", file=fileName, append = TRUE)
-}
-
-latexTopBottomTable <- function(diffData, lastColumnName, fileName, caption, label, dimension = TRUE) {
-  cols.dont.want <- "wdiff"
-  diffData <- diffData[, !names(diffData) %in% cols.dont.want, drop=F]
-  
-  top10 <- diffData[1:10,]
-  bTailIndex <- nrow(diffData)
-  bHeadIndex <- bTailIndex - 9
-  bottom10 <- diffData[bHeadIndex:bTailIndex,]
-  
-  cat("%Add this to preamble:
-  %\\makeatletter
-  %\\newcommand\\notsotiny{\\@setfontsize\\notsotiny{7}{7.5}}
-  %\\makeatother\n
-  \\begin{table*}[]
-  \\centering
-  \\notsotiny
-  ", file=fileName)
-  captionLine <- paste(paste("\\caption{",caption), ".}\n", sep="")
-  cat(captionLine, file=fileName, append = TRUE)
-  labelLine <- paste(paste("\\label{tab:", label, sep=""), "}\n", sep="")
-  cat(labelLine, file=fileName, append = TRUE)
-  cat("\\begin{tabular}{@{}llll@{}}", file=fileName, append = TRUE)
-  cat("
-  \\toprule", file=fileName, append = TRUE)
-  headerLine <- paste(paste("\n\\multicolumn{1}{c}{\\textbf{Dimension}} & \\multicolumn{1}{c}{\\textbf{Aspect}} & \\multicolumn{1}{c}{\\textbf{Feature}} & \\multicolumn{1}{c}{\\textbf{", lastColumnName, sep=""), "}} \\\\ \n", sep="")
-  cat(headerLine, file=fileName, append = TRUE)
-  cat("
-  \\midrule
-  ", file=fileName, append = TRUE)
-  write.table(top10, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  
-  cat("\\multicolumn{4}{c}{...} \\\\ \n", file=fileName, append = TRUE)
-  
-  write.table(bottom10, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  cat("\\bottomrule
-  \\end{tabular}%
-  \\end{table*}", file=fileName, append = TRUE)
-}
-
-
-latexCombinedTopBottomTable <- function(leftData, rightData, fileName, caption, label, dimension = TRUE) {
-  cols.dont.want <- "wdiff"
-  leftData <- leftData[, !names(leftData) %in% cols.dont.want, drop=F]
-  rightData <- rightData[, !names(rightData) %in% cols.dont.want, drop=F]
-  
-  top10Left <- leftData[1:10,]
-  top10Right <- rightData[1:10,]
-  bTailIndexLeft <- nrow(leftData)
-  bTailIndexRight <- nrow(rightData)
-  bHeadIndexLeft <- bTailIndexLeft - 9
-  bHeadIndexRight <- bTailIndexRight - 9
-  bottom10Left <- leftData[bHeadIndexLeft:bTailIndexLeft,]
-  bottom10Right <- rightData[bHeadIndexRight:bTailIndexRight,]
-  
-  cat("%Add this to preamble:
-  %\\makeatletter
-  %\\newcommand\\notsotiny{\\@setfontsize\\notsotiny{7}{7.5}}
-  %\\makeatother\n
-  \\begin{table*}[]
-  \\caption{The ten most and least adopted and needed techniques.}
-  \\label{tab:top-bottom-need}
-  \\begin{subtable}[c]{0.5\\", file=fileName, append = TRUE)
-  cat("textwidth}
-  \\centering
-  \\notsotiny
-  \\caption{Adoption.}
-  \\label{tab:top-bottom-current}
-  \\begin{tabular}{@{}lll@{}}
-  \\toprule
-  \\multicolumn{1}{c}{\\textbf{Feature}} & \\multicolumn{1}{c}{\\textbf{Feature group}} & \\multicolumn{1}{c}{\\textbf{\\%}} \\\\
-  \\midrule
-  ", file=fileName, append = TRUE)
-  write.table(top10Left, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  
-  cat("\\multicolumn{3}{c}{...} \\\\ \n", file=fileName, append = TRUE)
-  
-  write.table(bottom10Left, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  cat("\\bottomrule
-  \\end{tabular}%
-  \\end{subtable}
-  \\begin{subtable}[c]{0.5\\", file=fileName, append = TRUE)
-  cat("textwidth}
-  \\centering
-  \\notsotiny
-  \\caption{Need.}
-  \\label{tab:top-bottom-need}
-  \\begin{tabular}{@{}lll@{}}
-  \\toprule
-  \\multicolumn{1}{c}{\\textbf{Feature}} & \\multicolumn{1}{c}{\\textbf{Feature group}} & \\multicolumn{1}{c}{\\textbf{\\%}} \\\\
-  \\midrule
-  ", file=fileName, append = TRUE)
-  write.table(top10Right, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  
-  cat("\\multicolumn{3}{c}{...} \\\\ \n", file=fileName, append = TRUE)
-  
-  write.table(bottom10Right, file = fileName, sep = " & ", row.names = FALSE, col.names = FALSE, quote = FALSE, append=TRUE, eol = " \\\\ \n")
-  cat("\\bottomrule
-  \\end{tabular}
-  \\end{subtable}
-  \\end{table*}", file=fileName, append = TRUE)
 }
 
 ############## Main globals ##############
@@ -361,8 +213,7 @@ features <- list(
       'Multi-view modeling',
       'General-purpose modeling languages',
       'Domain-specific modeling languages',
-      'Importing external languages into the modeling environment',
-      'Projectional editing'
+      'Importing external languages into the modeling environment'
     ),
     list(
       "Model validation",
@@ -386,6 +237,7 @@ features <- list(
       "Tree-based editors",
       "Sketch-based editors",
       "Editors supporting multiple types of notations",
+      "Projectional editing",
       "Desktop-based modeling environment",
       "Web-based modeling environment",
       "Mobile-based modeling environment"
@@ -467,9 +319,9 @@ features <- list(
 
 d <- list(
   list(
-    list(current = data[14:20], need = data[44:50]),
-    list(current = data[21:33], need = data[51:63]),
-    list(current = data[34:42], need = data[64:72])
+    list(current = data[14:19], need = data[44:49]),
+    list(current = data[20:32], need = data[50:62]),
+    list(current = data[33:42], need = data[63:72])
   ),
   list(
     list(current = data[74:78], need = data[102:106]),
@@ -500,7 +352,7 @@ for (i in 1:length(dimensions)){
 ############## Main ##############
 print("Starting...")
 
-outputFolders = c('aggregated', 'aggregated/xlsx', 'likert', 'tables-txt', 'tables-latex', 'tables-latex/aggregated', 'plots')
+outputFolders = c('aggregated', 'aggregated/xlsx', 'likert', 'plots')
 
 for (f in outputFolders){
   folder = paste("../06_output", f, sep="/")
@@ -546,24 +398,6 @@ allDiffsToPrint <- prettyPrint(allDiffsToPrint, "dimension")
 allDiffsToPrint <- prettyPrint(allDiffsToPrint, "aspect")
 
 write.xlsx(allDiffsToPrint, "../06_output/aggregated/xlsx/Aggregated.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = TRUE)
-latexTable(diffData = allDiffsToPrint[order(-allDiffsToPrint$current),], fileName="../06_output/tables-latex/aggregated/aggregated-currentDesc.tex", caption="Most frequently encountered features across the three dimensions", label="most-frequent", dimension = TRUE)
-latexTable(diffData = allDiffsToPrint[order(allDiffsToPrint$current),], fileName="../06_output/tables-latex/aggregated/aggregated-currentAsc.tex", caption="Least frequently encountered features across the three dimensions", label="least-frequent", dimension = TRUE)
-latexTable(diffData = allDiffsToPrint[order(-allDiffsToPrint$need),], fileName="../06_output/tables-latex/aggregated/aggregated-needDesc.tex", caption="Most needed features across the three dimensions", label="most-needed", dimension = TRUE)
-latexTable(diffData = allDiffsToPrint[order(allDiffsToPrint$need),], fileName="../06_output/tables-latex/aggregated/aggregated-needAsc.tex", caption="Least needed features across the three dimensions", label="least-needed", dimension = TRUE)
-latexTable(diffData = allDiffsToPrint[order(-allDiffsToPrint$diff),], fileName="../06_output/tables-latex/aggregated/aggregated-diffDesc.tex", caption="Most impactful shortcomings across the three dimensions", label="most-impactful", dimension = TRUE)
-latexTable(diffData = allDiffsToPrint[order(allDiffsToPrint$diff),], fileName="../06_output/tables-latex/aggregated/aggregated-diffAsc.tex", caption="Least impactful shortcomings across the three dimensions", label="least-impactful", dimension = TRUE)
-
-
-d = allDiffsToPrint[order(-allDiffsToPrint$current), ]
-latexTopBottomTable(diffData = d[, c(1:3,4)], "Current", fileName="../06_output/tables-latex/aggregated/top-bottom-current.tex", caption="The ten most used, and the ten least used features across the three dimensions", label="top-bottom-current", dimension = TRUE)
-d = allDiffsToPrint[order(-allDiffsToPrint$need), ]
-latexTopBottomTable(diffData = d[, c(1:3,5)], "Need", fileName="../06_output/tables-latex/aggregated/top-bottom-need.tex", caption="The ten most needed, and the ten least needed features across the three dimensions", label="top-bottom-need", dimension = TRUE)
-d = allDiffsToPrint[order(-allDiffsToPrint$diff), ]
-latexTopBottomTable(diffData = d[, c(1:3,6)], "$\\Delta$", fileName="../06_output/tables-latex/aggregated/top-bottom-delta.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
-dLeft = allDiffsToPrint[order(-allDiffsToPrint$current), ]
-dRight = allDiffsToPrint[order(-allDiffsToPrint$need), ]
-latexCombinedTopBottomTable(leftData = dLeft[, c(3, 2, 4)], rightData = dRight[, c(3, 2, 5)], fileName="../06_output/tables-latex/aggregated/top-bottom-need-combined.tex", caption="The ten most impactful, and the ten least impactful items across the three dimensions", label="top-bottom-delta", dimension = TRUE)
-
 
 ######## Plot current vs need ########
 levelsD <- c("Model management", "Collaboration", "Communication")
@@ -588,7 +422,7 @@ for (i in 1:length(longNames)){
   }
 }
 
-scatterplots <- function(df, title, xtitle, xleft, xright){
+scatterplots <- function(df, title, xtitle, xleft, xright, xMinorBreaks = c(50)){
   for(i in 1:length(dimensions)){
     a <- df[which(df$dimension==levelsD[[i]]),]
     
@@ -597,7 +431,7 @@ scatterplots <- function(df, title, xtitle, xleft, xright){
       scale_shape_manual(values=shapes[i]) +
       scale_x_continuous(
         breaks=c(25, 75),
-        minor_breaks = c(50),
+        minor_breaks = xMinorBreaks,
         labels=c(xleft, xright),
         limits=c(0,100),
         name = xtitle) +
@@ -647,18 +481,16 @@ scatterplots(allDiffsToPrint, "scatterplot_", "Adoption", "less adopted", "more 
 
 
 studiesdata <- read.csv2("../04_data/studies_data.csv", header = TRUE, quote = "\"", dec = ".", fill = TRUE, comment.char = "")
-rq3df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
+rq4df = merge(x=studiesdata,y=allDiffsToPrint[ ,c("feature", "need")], by="feature")
 
 
 target <- c("Model management", "Collaboration", "Communication")
-#rq3df <- rq3df[match(target, rq3df$dimension),]
-rq3df <- rq3df[order(match(rq3df[[2]], target)), ]
+rq4df <- rq4df[order(match(rq4df[[2]], target)), ]
 
 plots <- c()
-scatterplots(rq3df, "scatterplot_rq3_", "Support by academic approaches (relative frequency)", "less researched", "more researched")
+scatterplots(rq4df, "scatterplot_rq3_", "Support by academic approaches (relative frequency)", "", "", c())
 
-
-write.xlsx(rq3df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
+write.xlsx(rq4df, "../06_output/aggregated/xlsx/Studies.xlsx", sheetName = "Sheet1", col.names = TRUE, row.names = FALSE, append = FALSE)
 
 dev.off()
 

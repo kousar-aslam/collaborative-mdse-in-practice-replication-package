@@ -1,12 +1,14 @@
+import os
+import shutil
+import statistics
+from collections import Counter
+
+import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
-from collections import Counter
-import numpy as np
-import os
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.ticker import MaxNLocator
-import statistics
-import shutil
+
 
 dataLocation = '../04_data'
 data = pd.read_csv('{}/demographics_data.csv'.format(dataLocation), sep=';')
