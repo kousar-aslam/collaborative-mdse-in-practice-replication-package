@@ -40,7 +40,7 @@ Install Python requirements before running the scripts by running `pip install -
 
 * `/05_analysis` - Analysis scripts.
    * `/01_analysis_participant_demographics.py` - Charts of some demographic and descriptive statistics of the participants, their companies, the tools used, model sizes, etc.
-   * `/02_generate_latex_tables.py` - Generates LaTeX tables used in the paper.
+   * `/02_generate_latex_tables.py` - Generates LaTeX tables used in the paper. The `/template` folder contains the LaTeX template.
    * `/03_analysis_RQs.R` - .R script for analyzing the RQs. Produces Likert plots, need-adoption matrices, and Excel reports into folder `/06_output`.
 
 ![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09–OK&color=00ff00)
