@@ -47,6 +47,6 @@ Upon running the analysis scripts, the following directory structure is produced
    * `/tables-txt` - Adoption and needs for every feature group, in .txt files.
 
 ### References
-[1] Franzago, M., Di Ruscio, D., Malavolta, I., & Muccini, H. (2017). Collaborative model-driven software engineering: a classification framework and a research map. IEEE Transactions on Software Engineering, 44(12), 1146-1175.
+[1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
 
-[2] David, I., Aslam, K., Faridmoayer, S., Malavolta, I., Syriani, E., & Lago, P. (2021, October). Collaborative model-driven software engineering: a systematic update. In 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS) (pp. 273-284). IEEE.
+[2] David, I., Aslam, K., Faridmoayer, S., Malavolta, I., Syriani, E., & Lago, P. (2021). Collaborative Model-Driven Software Engineering: A Systematic Update. In 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS). 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS). IEEE. https://doi.org/10.1109/models50736.2021.00035
