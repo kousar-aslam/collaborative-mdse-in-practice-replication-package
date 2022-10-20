@@ -37,7 +37,7 @@ Install Python requirements before running the scripts by running `pip install -
    * `questionnaire_data.csv` – Data file containing pre-processed and cleaned questionnaire data.
    * `studies_data.csv` – Data file containing data about academic output.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00)
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Added the re-arrangement of columns to `1_prepare_data.py`.
 
 ### Analysis scripts
 
@@ -46,7 +46,7 @@ Install Python requirements before running the scripts by running `pip install -
    * `02_generate_latex_tables.py` – Generates LaTeX tables used in the paper. The `/template` folder contains the LaTeX template.
    * `03_analysis_RQs.R` – .R script for analyzing the RQs. Produces Likert plots, need-adoption matrices, and Excel reports into folder `/06_output`.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00)
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Introduced the changes to the R script.
 
 ### Results
 
@@ -60,7 +60,7 @@ Upon running the analysis scripts, the following directory structure is produced
    * `/likert-annotated` – Likert charts annotated with feature labels.
    * `/tables` – LaTeX tables used in the paper.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00)
+![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Re-generated the results and removed unused txt and LaTeX tables.
 
 ### References
 [1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
