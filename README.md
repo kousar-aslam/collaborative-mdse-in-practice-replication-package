@@ -1,9 +1,15 @@
 # Replication package
 ### for the paper _Collaborative Model-Driven Software Engineering – A Systematic Survey of Practices and Needs in Industry_.
 
+## About -- TODO
+## Contents -- TODO
+## Reproduction -- TODO
+-----
+
 The full dataset, analysis scripts, raw results, and transcripts of the focus group discussions are available below.
 
 Install Python requirements before running the scripts by running `pip install -r requirements.txt` from the root folder.
+
 
 ### Transcripts
 * `/01_transcripts` – Anonymized transcripts of the focus group sessions.
