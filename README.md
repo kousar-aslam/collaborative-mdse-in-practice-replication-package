@@ -1,7 +1,10 @@
 # Replication package
 ### for the paper _Collaborative Model-Driven Software Engineering – A Systematic Survey of Practices and Needs in Industry_.
 
-## About -- TODO
+## About
+
+This paper reports on a mixed-method survey on the practices and needs concerning Collaborative MDSE in industry. First, we carried out a qualitative survey in two focus group sessions, interviewing seven industry experts. Second, based on the results of the interviews, we have constructed a questionnaire and carried out a questionnaire survey with 41 industry expert participants.
+
 ## Contents -- TODO
 ## Reproduction -- TODO
 -----
