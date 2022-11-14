@@ -5,14 +5,9 @@
 
 This paper reports on a mixed-method survey on the practices and needs concerning Collaborative MDSE in industry. First, we carried out a qualitative survey in two focus group sessions, interviewing seven industry experts. Second, based on the results of the interviews, we have constructed a questionnaire and carried out a questionnaire survey with 41 industry expert participants.
 
-## Contents -- TODO
-## Reproduction -- TODO
------
+## Contents
 
-The full dataset, analysis scripts, raw results, and transcripts of the focus group discussions are available below.
-
-Install Python requirements before running the scripts by running `pip install -r requirements.txt` from the root folder.
-
+This repository contains data sets, analysis scripts, raw results, and transcripts of the focus group discussions.
 
 ### Transcripts
 * `/01_transcripts` – Anonymized transcripts of the focus group sessions.
@@ -71,7 +66,10 @@ Upon running the analysis scripts, the following directory structure is produced
 
 ![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Re-generated the results and removed unused txt and LaTeX tables.
 
-### References
+## Reproduction -- TODO
+
+
+## References
 [1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
 
 [2] David, I., Aslam, K., Faridmoayer, S., Malavolta, I., Syriani, E., & Lago, P. (2021). Collaborative Model-Driven Software Engineering: A Systematic Update. In 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS). 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS). IEEE. https://doi.org/10.1109/models50736.2021.00035
