@@ -66,8 +66,32 @@ Upon running the analysis scripts, the following directory structure is produced
 
 ![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Re-generated the results and removed unused txt and LaTeX tables.
 
-## Reproduction -- TODO
+## Reproduction
+Install Python requirements before running the scripts by running `pip install -r requirements.txt` from the root folder.
 
+* [Reproduction of the analyses](#reproduction-of-the-analyses): reproduces the analysis results in `/04_results`, including charts and numeric results. The scripts use the prepared data contained in the `/01_data/prepared` folder.
+* [Reproduction of the prepared data](#reproduction-of-the-prepared-data): reproduces the prepared data in `/01_data/prepared` by (i) merging author, transaction and file length metadata into the clone data; and (ii), pre-processing data for analysis and persisting the pre-processed data into pickle files. Some of the pre-processing steps are potentially time-consuming. In such cases, the approximate execution times are reported in the source file.
+
+**NOTE:** The following steps have been tested with `python>=3.7 && python<3.10` and `R version 4.2.2`.
+
+### Reproduction of the analyses
+
+Follow the steps below to reproduce the analysis results in `/06_results`.
+
+1. Clone this repository.
+2. Install dependencies by running `pip install -r requirements.txt` in the root folder.
+3. Run `python 01_analysis_participant_demographics.py` in the `/05_analysis` folder to obtain demographics results.
+4. Run `python 02_generate_latex_tables.py` in the `/05_analysis` folder to obtain LaTeX tables reporting on results.
+5. Run `03_analysis_RQs.R` (e.g., from [R Studio](https://rstudio.cloud/)) in the `/05_analysis` folder to obtain the Likert charts and the aggregated results in Excel sheets under `/aggregated`.
+
+### Reproduction of the prepared data
+
+Follow the steps below to reproduce the prepared data in `/04_data`.
+
+1. Run `python 01_prepare_data.py` in the `/04_data` folder to obtain the following data files:
+   1. `demographics_data.csv` -- demographics data for later analysis.
+   2. `questionnaire_data.csv` -- questionnaire data for RQs 1--3.
+   3. `studies_data.xlsx` -- consolidated studies data for RQ4.
 
 ## References
 [1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
