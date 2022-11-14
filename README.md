@@ -90,7 +90,7 @@ Follow the steps below to reproduce the prepared data in `/04_data`.
 
 1. Run `python 01_prepare_data.py` in the `/04_data` folder to obtain the following data files:
    1. `demographics_data.csv` – demographics data for later analysis.
-   2. `questionnaire_data.csv` – questionnaire data for RQs 1--3.
+   2. `questionnaire_data.csv` – questionnaire data for RQs 1–3.
    3. `studies_data.xlsx` – consolidated studies data for RQ4.
 
 ## References
