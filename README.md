@@ -89,9 +89,9 @@ Follow the steps below to reproduce the analysis results in `/06_results`.
 Follow the steps below to reproduce the prepared data in `/04_data`.
 
 1. Run `python 01_prepare_data.py` in the `/04_data` folder to obtain the following data files:
-   1. `demographics_data.csv` -- demographics data for later analysis.
-   2. `questionnaire_data.csv` -- questionnaire data for RQs 1--3.
-   3. `studies_data.xlsx` -- consolidated studies data for RQ4.
+   1. `demographics_data.csv` – demographics data for later analysis.
+   2. `questionnaire_data.csv` – questionnaire data for RQs 1--3.
+   3. `studies_data.xlsx` – consolidated studies data for RQ4.
 
 ## References
 [1] Franzago, M., Ruscio, D. D., Malavolta, I., & Muccini, H. (2018). Collaborative Model-Driven Software Engineering: A Classification Framework and a Research Map. In IEEE Transactions on Software Engineering (Vol. 44, Issue 12, pp. 1146–1175). Institute of Electrical and Electronics Engineers (IEEE). https://doi.org/10.1109/tse.2017.2755039
