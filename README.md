@@ -12,19 +12,13 @@ This repository contains data sets, analysis scripts, raw results, and transcrip
 ### Transcripts
 * `/01_transcripts` – Anonymized transcripts of the focus group sessions.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Added warnings in a README in the folder.
-
 ### Classification framework
 * `/02_classification_framework` – Classification framework and definitions of terms.
-
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Updated in the Overleaf project and added a new PDF here.
 
 ### Questionnaire
 * `/03_questionnaire`
    * `Questionnaire.pdf` – The questionnaire used in the online survey.
    * `Collaborative Model-Driven Software Engineering – An Overview.pdf` – The overview the participants were provided with.
-
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Added warnings in a README in the folder.
 
 ### Data
 
@@ -41,16 +35,12 @@ This repository contains data sets, analysis scripts, raw results, and transcrip
    * `questionnaire_data.csv` – Data file containing pre-processed and cleaned questionnaire data.
    * `studies_data.csv` – Data file containing data about academic output.
 
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Added the re-arrangement of columns to `1_prepare_data.py`.
-
 ### Analysis scripts
 
 * `/05_analysis` – Analysis scripts.
    * `01_analysis_participant_demographics.py` – Charts of some demographic and descriptive statistics of the participants, their companies, the tools used, model sizes, etc.
    * `02_generate_latex_tables.py` – Generates LaTeX tables used in the paper. The `/template` folder contains the LaTeX template.
    * `03_analysis_RQs.R` – .R script for analyzing the RQs. Produces Likert plots, need-adoption matrices, and Excel reports into folder `/06_output`.
-
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Introduced the changes to the R script.
 
 ### Results
 
@@ -63,8 +53,6 @@ Upon running the analysis scripts, the following directory structure is produced
    * `/likert` – Likert charts in PDF files with the adoption-need pairs of feature groups charted next to each other.
    * `/likert-annotated` – Likert charts annotated with feature labels.
    * `/tables` – LaTeX tables used in the paper.
-
-![](https://img.shields.io/static/v1?label=&message=R2.08/R2.09&color=00ff00) Re-generated the results and removed unused txt and LaTeX tables.
 
 ## Reproduction
 Install Python requirements before running the scripts by running `pip install -r requirements.txt` from the root folder.
