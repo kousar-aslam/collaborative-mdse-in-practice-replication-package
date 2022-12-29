@@ -54,6 +54,9 @@ Upon running the analysis scripts, the following directory structure is produced
    * `/likert-annotated` – Likert charts annotated with feature labels.
    * `/tables` – LaTeX tables used in the paper.
 
+### Paper
+* `/07_paper` – Preprint of the accepted article.
+
 ## Reproduction
 Install Python requirements before running the scripts by running `pip install -r requirements.txt` from the root folder.
 
