@@ -1,5 +1,5 @@
 # Replication package
-### for the paper _Collaborative Model-Driven Software Engineering – A Systematic Survey of Practices and Needs in Industry_.
+### For the paper _Collaborative Model-Driven Software Engineering – A Systematic Survey of Practices and Needs in Industry_.
 
 ## About
 
